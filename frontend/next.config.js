@@ -2,6 +2,8 @@ require("dotenv").config();
 
 module.exports = {
   env: {
-    API_URL: process.env.CMS_GRAPHQL_API_URL,
+    CMS_URL: process.env.CMS_URL || "http://localhost:1337",
+    CMS_GRAPHQL_API_URL:
+      process.env.CMS_GRAPHQL_API_URL || "http://localhost:1337/graphql",
   },
 };

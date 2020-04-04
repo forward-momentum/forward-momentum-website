@@ -26,8 +26,13 @@
       "required": false
     },
     "tags": {
-      "via": "pages",
-      "collection": "tag"
+      "collection": "tag",
+      "via": "pages"
+    },
+    "slug": {
+      "type": "string",
+      "unique": true,
+      "required": true
     }
   }
 }
