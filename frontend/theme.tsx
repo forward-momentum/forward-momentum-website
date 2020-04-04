@@ -19,6 +19,11 @@ export default {
       'system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", sans-serif',
     heading: 'inherit',
   },
+  buttons: {
+    primary: {
+      cursor: 'pointer',
+    }
+  },
   styles: {
     root: {
       fontFamily: 'body',
@@ -30,6 +35,7 @@ export default {
       color: 'primary',
     },
     a: {
+      cursor: 'pointer',
       color: 'primary',
       textDecoration: 'none',
       ':hover': {

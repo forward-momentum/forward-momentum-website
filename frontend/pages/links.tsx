@@ -1,8 +1,9 @@
 /** @jsx jsx */
-import { jsx, Styled } from 'theme-ui'
+import { jsx, Styled, Heading } from 'theme-ui';
 import { withApollo } from '../lib/apollo'
 import graphql from 'graphql-tag';
 import { useQuery } from '@apollo/react-hooks';
+import { ContentWrapper } from '../components/elements';
 
 const QUERY_SOCIAL_MEDIA = graphql`
   query socialMediaLinksQuery {
@@ -21,10 +22,10 @@ const Page = () => {
   }
 
   return (
-    <div>
-      <Styled.h1>Links</Styled.h1>
+    <ContentWrapper>
+      <Heading>Links</Heading>
       <Styled.pre>{JSON.stringify({ data, loading, error }, null, 2)}</Styled.pre>
-    </div>
+    </ContentWrapper>
   )
 };
 
