@@ -1,0 +1,14 @@
+{
+  "connection": "default",
+  "collectionName": "components_atoms_texts",
+  "info": {
+    "name": "text",
+    "icon": "align-left"
+  },
+  "options": {},
+  "attributes": {
+    "value": {
+      "type": "richtext"
+    }
+  }
+}
