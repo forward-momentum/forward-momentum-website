@@ -31,7 +31,26 @@ const Page = () => {
 
   return (
     <Layout>
-      <Box sx={{ textAlign: 'right', bg: 'red', color: 'white', p: [4, 4], variant: 'page.block' }}>
+      <Box sx={{ bg: 'paleRed', color: 'white', p: 3 }}>
+        <Text><b>Reckon this is the right direction?</b> Get campaign updates and see how you can get involved.</Text>
+        <form method='GET' action='/signup'>
+          <Input
+            name='email'
+            type='email'
+            placeholder='Enter your email address'
+            sx={{
+              textAlign: 'center',
+              border: '3px solid',
+              borderColor: 'indigo',
+              color: 'black',
+              bg: 'white',
+              mb: -50,
+              boxShadow: '0px 5px 10px rgba(0,0,0,0.1)',
+              p: [2, 3]
+            }}
+          />
+        </form>
+      </Box>
         <Box sx={{ variant: 'page.width' }}>
           <Box sx={{ maxWidth: ['80%', 400] }}>
             <Logo />
