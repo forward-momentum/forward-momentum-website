@@ -102,89 +102,91 @@ const SignUp = () => {
 
   return (
     <Layout>
-      <Box sx={{ variant: 'page.width' }}>
-        <form onSubmit={handleSubmit(onSubmit as any)}>
+      <Box sx={{ variant: 'page.block', fontSize: 3 }}>
+        <Box sx={{ variant: 'page.narrow' }}>
+          <form onSubmit={handleSubmit(onSubmit as any)}>
 
-          <Label>{(schema.fields.isSupporter as any)._label}</Label>
-          <Label variant='forms.checkboxOption' sx={{ lineHeight: '2em' }}>
-            <IN sx={{ variant: 'checkbox' }} name='isSupporter' type="checkbox" ref={register} />
+            <Label>{(schema.fields.isSupporter as any)._label}</Label>
+            <Label variant='forms.checkboxOption' sx={{ lineHeight: '2em' }}>
+              <IN sx={{ variant: 'checkbox' }} name='isSupporter' type="checkbox" ref={register} />
             Yes, I support the campaign
           </Label>
 
-          <Label>{(schema.fields.hasVolunteered as any)._label}</Label>
-          <Label variant='forms.checkboxOption' sx={{ lineHeight: '2em' }}>
-            <IN type='checkbox' sx={{ variant: 'checkbox' }} name={'hasVolunteered'} ref={register} />
+            <Label>{(schema.fields.hasVolunteered as any)._label}</Label>
+            <Label variant='forms.checkboxOption' sx={{ lineHeight: '2em' }}>
+              <IN type='checkbox' sx={{ variant: 'checkbox' }} name={'hasVolunteered'} ref={register} />
             Yes, let me know how
           </Label>
 
-          <TextInput
-            name='firstName'
-            schema={schema}
-            errors={errors}
-            register={register}
-          />
+            <TextInput
+              name='firstName'
+              schema={schema}
+              errors={errors}
+              register={register}
+            />
 
-          <TextInput
-            name='lastName'
-            schema={schema}
-            errors={errors}
-            register={register}
-          />
+            <TextInput
+              name='lastName'
+              schema={schema}
+              errors={errors}
+              register={register}
+            />
 
-          <TextInput
-            name='email'
-            type='email'
-            schema={schema}
-            errors={errors}
-            register={register}
-          />
+            <TextInput
+              name='email'
+              type='email'
+              schema={schema}
+              errors={errors}
+              register={register}
+            />
 
-          <TextInput
-            name='phone'
-            schema={schema}
-            errors={errors}
-            register={register}
-          />
+            <TextInput
+              name='phone'
+              schema={schema}
+              errors={errors}
+              register={register}
+            />
 
-          <Label>{(schema.fields.region as any)._label}</Label>
-          <Controller
-            name="region"
-            control={control}
-            as={
-              <Select>
-                <option disabled selected>Select a region</option>
-                {Array.from((schema.fields.region as any)._whitelist.list as string[]).map((value, key) => (
-                  <option id={`amount-${key}`} value={value}>{value}</option>
-                ))}
-              </Select>
-            }
-          />
-          {errors.region && <div style={fieldErrorStyle}>{errors.region.message}</div>}
+            <Label>{(schema.fields.region as any)._label}</Label>
+            <Controller
+              name="region"
+              control={control}
+              as={
+                <Select>
+                  <option disabled selected>Select a region</option>
+                  {Array.from((schema.fields.region as any)._whitelist.list as string[]).map((value, key) => (
+                    <option id={`amount-${key}`} value={value}>{value}</option>
+                  ))}
+                </Select>
+              }
+            />
+            {errors.region && <div style={fieldErrorStyle}>{errors.region.message}</div>}
 
-          <Label variant='forms.checkboxOption'>
-            <IN sx={{ variant: 'checkbox' }} type='checkbox' name='consentToDataPolicy' ref={register} />
-            <small>You are over the age of 13 or have you parents/guardians' permission to sign this form. You consent to Forward Momentum staff and volunteers storing and handling my data for campaign purposes, in accordance with our <Link href='/privacy-policy'>privacy policy</Link>.</small>
-          </Label>
-          {errors.consentToDataPolicy && <div style={fieldErrorStyle}>{errors.consentToDataPolicy.message}</div>}
+            <Label variant='forms.checkboxOption' sx={{ mt: 4 }}>
+              <IN sx={{ variant: 'checkbox' }} type='checkbox' name='consentToDataPolicy' ref={register} />
+              <small>You are over the age of 13 or have you parents/guardians' permission to sign this form. You consent to Forward Momentum staff and volunteers storing and handling my data for campaign purposes, in accordance with our <Link href='/privacy-policy'>privacy policy</Link>.</small>
+            </Label>
+            {errors.consentToDataPolicy && <div style={fieldErrorStyle}>{errors.consentToDataPolicy.message}</div>}
 
-          <Label>Forward Momentum staff and volunteers can contact me about their campaigns via...</Label>
-          <Label variant='forms.checkboxOption' sx={{ lineHeight: '2em' }}>
-            <IN sx={{ variant: 'checkbox' }} type='checkbox' name={'consentToEmail'} ref={register} />
-            <span>Email</span>
-          </Label>
-          <Label variant='forms.checkboxOption' sx={{ lineHeight: '2em' }}>
-            <IN sx={{ variant: 'checkbox' }} type='checkbox' name={'consentToMessaging'} ref={register} />
-            <span>SMS / Whatsapp</span>
-          </Label>
-          <Label variant='forms.checkboxOption' sx={{ lineHeight: '2em' }}>
-            <IN sx={{ variant: 'checkbox' }} type='checkbox' name={'consentToPhone'} ref={register} />
-            <span>Phone call</span>
-          </Label>
+            <Label>Forward Momentum staff and volunteers can contact me about their campaigns via...</Label>
+            <Label variant='forms.checkboxOption' sx={{ lineHeight: '2em' }}>
+              <IN sx={{ variant: 'checkbox' }} type='checkbox' name={'consentToEmail'} ref={register} />
+              <span>Email</span>
+            </Label>
+            <Label variant='forms.checkboxOption' sx={{ lineHeight: '2em' }}>
+              <IN sx={{ variant: 'checkbox' }} type='checkbox' name={'consentToMessaging'} ref={register} />
+              <span>SMS / Whatsapp</span>
+            </Label>
+            <Label variant='forms.checkboxOption' sx={{ lineHeight: '2em' }}>
+              <IN sx={{ variant: 'checkbox' }} type='checkbox' name={'consentToPhone'} ref={register} />
+              <span>Phone call</span>
+            </Label>
 
-          <Button type="submit">
-            Complete
+            <Button type="submit" sx={{ mt: 3, fontSize: 4, fontWeight: 700, width: '100%' }}>
+              Complete
           </Button>
-        </form>
+          </form>
+        </Box>
       </Box>
     </Layout>
   )

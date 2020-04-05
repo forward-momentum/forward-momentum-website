@@ -34,8 +34,6 @@ const SEO: React.FC<{
 }) => {
     const { data, loading, error } = useQuery(QUERY_WEBSITE_INFO)
 
-    console.log({ data, loading, error })
-
     const site = data?.websiteInformation
     const _websiteTitle = websiteTitle || site?.websiteTitle
     const _twitterHandle = twitterHandle || site?.twitterHandle

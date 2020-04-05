@@ -1,0 +1,23 @@
+{
+  "connection": "default",
+  "collectionName": "components_atoms_images",
+  "info": {
+    "name": "Image",
+    "icon": "image"
+  },
+  "options": {},
+  "attributes": {
+    "image": {
+      "model": "file",
+      "via": "related",
+      "plugin": "upload",
+      "required": false
+    },
+    "caption": {
+      "type": "string"
+    },
+    "linkURL": {
+      "type": "string"
+    }
+  }
+}

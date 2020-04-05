@@ -1,0 +1,20 @@
+{
+  "connection": "default",
+  "collectionName": "components_atoms_documents",
+  "info": {
+    "name": "Document",
+    "icon": "paperclip"
+  },
+  "options": {},
+  "attributes": {
+    "file": {
+      "model": "file",
+      "via": "related",
+      "plugin": "upload",
+      "required": false
+    },
+    "caption": {
+      "type": "string"
+    }
+  }
+}

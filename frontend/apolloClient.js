@@ -1,7 +1,25 @@
 import { ApolloClient } from "apollo-client";
-import { InMemoryCache } from "apollo-cache-inmemory";
+import {
+  InMemoryCache,
+  IntrospectionFragmentMatcher,
+} from "apollo-cache-inmemory";
 import { HttpLink } from "apollo-link-http";
 import fetch from "isomorphic-unfetch";
+import introspectionQueryResultData from "./schema";
+
+/**
+query introspectionQueryResultData {
+  __schema {
+    types {
+      kind
+      name
+      possibleTypes {
+        name
+      }
+    }
+  }
+}
+*/
 
 export default function createApolloClient(initialState, ctx) {
   // The `ctx` (NextPageContext) will only be present on the server.
@@ -13,6 +31,10 @@ export default function createApolloClient(initialState, ctx) {
       credentials: "same-origin", // Additional fetch() options like `credentials` or `headers`
       fetch,
     }),
-    cache: new InMemoryCache().restore(initialState),
+    cache: new InMemoryCache({
+      fragmentMatcher: new IntrospectionFragmentMatcher({
+        introspectionQueryResultData,
+      }),
+    }).restore(initialState),
   });
 }

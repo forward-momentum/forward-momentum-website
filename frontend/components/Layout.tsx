@@ -5,6 +5,7 @@ import SEO from './SEO';
 import Contacts from './Contacts';
 // @ts-ignore
 import Logo from '../public/logo.svg';
+import Link from 'next/link';
 
 export default ({ children }) => {
   return (
@@ -12,6 +13,7 @@ export default ({ children }) => {
       <SEO />
       <Header />
       {children}
+      <Box sx={{ height: ['2em', '3em', '4em'] }} />
       <Footer />
     </Fragment>
   )
@@ -22,11 +24,14 @@ const Header = () => {
     <Box sx={{ textAlign: 'center', pt: [4, 5, 6], pb: [2, 4, 5], px: [4, 4], variant: 'page.block' }}>
       <Box sx={{ variant: 'page.width' }}>
         <Box className='logo' sx={{ maxWidth: ['100%', 400], display: 'inline-block' }}>
-          <Logo sx={{
-            '* path': {
-              fill: 'red'
-            }
-          }} />
+          <Link href='/'>
+            <Logo sx={{
+              cursor: 'pointer',
+              '* path': {
+                fill: 'red'
+              }
+            }} />
+          </Link>
         </Box>
       </Box>
     </Box>

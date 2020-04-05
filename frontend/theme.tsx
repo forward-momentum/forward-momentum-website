@@ -42,11 +42,15 @@ export default {
     block: {
       mb: [1, 2],
       mt: [1, 2],
-      mx: [1, 2]
+      mx: 3
     },
     width: {
       mx: 'auto',
       maxWidth: 800
+    },
+    narrow: {
+      mx: 'auto',
+      maxWidth: 500
     },
   },
   checkbox: {

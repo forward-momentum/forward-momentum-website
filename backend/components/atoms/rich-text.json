@@ -1,0 +1,14 @@
+{
+  "connection": "default",
+  "collectionName": "components_atoms_rich_texts",
+  "info": {
+    "name": "Rich text section",
+    "icon": "align-right"
+  },
+  "options": {},
+  "attributes": {
+    "value": {
+      "type": "richtext"
+    }
+  }
+}

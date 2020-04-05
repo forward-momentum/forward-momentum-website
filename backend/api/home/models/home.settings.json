@@ -1,0 +1,24 @@
+{
+  "kind": "singleType",
+  "connection": "default",
+  "collectionName": "homes",
+  "info": {
+    "name": "Home"
+  },
+  "options": {
+    "increments": true,
+    "timestamps": true
+  },
+  "attributes": {
+    "blocks": {
+      "type": "dynamiczone",
+      "components": [
+        "atoms.rich-text",
+        "atoms.learn-more-button",
+        "atoms.image",
+        "atoms.document",
+        "atoms.big-heading"
+      ]
+    }
+  }
+}

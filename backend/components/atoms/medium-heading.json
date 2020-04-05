@@ -1,0 +1,14 @@
+{
+  "connection": "default",
+  "collectionName": "components_atoms_medium_headings",
+  "info": {
+    "name": "Medium heading",
+    "icon": "text-width"
+  },
+  "options": {},
+  "attributes": {
+    "text": {
+      "type": "string"
+    }
+  }
+}
