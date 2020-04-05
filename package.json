@@ -1,0 +1,11 @@
+{
+  "name": "forward-momentum",
+  "private": true,
+  "version": "0.1.0",
+  "description": "A Strapi application",
+  "engines": {
+    "node": ">=10.0.0",
+    "npm": ">=6.0.0",
+    "yarn": "*"
+  }
+}
