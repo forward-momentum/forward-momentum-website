@@ -106,7 +106,7 @@ const Page = () => {
               return (
                 <Box key={i}>
                   <Box>
-                    <Image src={block.image.url} />
+                    <Image src={process.env.CMS_URL + block.image.url} />
                     {block.caption && <Text sx={{ fontSize: 1, opacity: 0.5, pt: 2 }}>{block.caption}</Text>}
                   </Box>
                 </Box>
