@@ -7,6 +7,7 @@ import Logo from '../public/logo.svg';
 import graphql from 'graphql-tag';
 import { useQuery } from '@apollo/react-hooks';
 import Markdown from 'markdown-to-jsx';
+import Layout from '../components/Layout';
 
 const QUERY_ALL_PAGES = graphql`
   query HomePageQuery($slug: String!) {
@@ -29,7 +30,7 @@ const Page = () => {
   const page = data?.pages?.[0]
 
   return (
-    <Fragment>
+    <Layout>
       <Box sx={{ textAlign: 'right', bg: 'red', color: 'white', p: [4, 4], variant: 'page.block' }}>
         <Box sx={{ variant: 'page.width' }}>
           <Box sx={{ maxWidth: ['80%', 400] }}>
@@ -46,25 +47,7 @@ const Page = () => {
           })}
         </Box>
       </Box>
-      <Box sx={{ fontFamily: 'mono', textAlign: 'right', bg: 'red', color: 'white', p: [4, 4], variant: 'page.block' }}>
-        <Box sx={{ variant: 'page.width' }}>
-          <Box>Forward Momentum &copy; {new Date().getFullYear()}</Box>
-          <Box sx={{ height: '1em' }} />
-          <Grid
-            gap={1}
-            columns={[1, 2]}>
-            <Box>
-              <div>Get involved</div>
-              <Styled.a href='mailto:hello@fwdmomentum.org'>hello@fwdmomentum.org</Styled.a>
-            </Box>
-            <Box>
-              <div>Press enquiries</div>
-              <Styled.a href='mailto:comms@fwdmomentum.org'>comms@fwdmomentum.org</Styled.a>
-            </Box>
-          </Grid>
-        </Box>
-      </Box>
-    </Fragment>
+    </Layout>
   )
 };
 

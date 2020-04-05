@@ -1,0 +1,44 @@
+{
+  "kind": "singleType",
+  "connection": "default",
+  "collectionName": "website_informations",
+  "info": {
+    "name": "Website information"
+  },
+  "options": {
+    "increments": true,
+    "timestamps": true
+  },
+  "attributes": {
+    "websiteTitle": {
+      "type": "string"
+    },
+    "shareCardDescription": {
+      "type": "text"
+    },
+    "twitterHandle": {
+      "type": "string"
+    },
+    "shareCardHeadline": {
+      "type": "string"
+    },
+    "shareCardImage": {
+      "model": "file",
+      "via": "related",
+      "plugin": "upload",
+      "required": false
+    },
+    "contacts": {
+      "type": "component",
+      "repeatable": true,
+      "component": "atoms.contact"
+    },
+    "slug": {
+      "type": "string"
+    },
+    "uid": {
+      "type": "uid",
+      "targetField": "slug"
+    }
+  }
+}
