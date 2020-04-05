@@ -26,6 +26,7 @@ const Header = () => {
         <Box className='logo' sx={{ maxWidth: ['100%', 400], display: 'inline-block' }}>
           <Link href='/'>
             <Logo sx={{
+              width: '100%',
               cursor: 'pointer',
               '* path': {
                 fill: 'red'
