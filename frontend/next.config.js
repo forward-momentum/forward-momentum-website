@@ -12,5 +12,6 @@ module.exports = {
     AIRTABLE_MEMBERS_BASE_TABLE_NAME:
       process.env.AIRTABLE_MEMBERS_BASE_TABLE_NAME,
     REDIS_URL: process.env.REDIS_URL,
+    SITE_URL: process.env.SITE_URL,
   },
 };
