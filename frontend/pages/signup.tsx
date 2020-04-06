@@ -8,6 +8,7 @@ import { TextInput, fieldErrorStyle, IN } from '../components/form';
 import { Fragment } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
+import { registerSupporter } from '../data/api';
 
 export const schema = yup.object({
   consentToDataPolicy: yup
@@ -84,13 +85,7 @@ const SignUp = () => {
   const onSubmit = async (data: Fields) => {
     try {
       if (schema.isValid(data)) {
-        const res = await fetch('/api/registerSupporter', {
-          method: 'POST',
-          body: JSON.stringify(data),
-          headers: {
-            "Content-Type": 'application/json'
-          }
-        })
+        const res = await registerSupporter(data)
         if (!res.ok) throw new Error("Not OK response from server")
         const d = await res.json()
         if (!d.success) throw new Error("Failure to record signup. " + d.error)

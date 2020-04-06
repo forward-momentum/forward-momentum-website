@@ -6,6 +6,7 @@ import { useQuery } from '@apollo/react-hooks';
 import Markdown from 'react-markdown';
 import Layout from '../components/Layout';
 import Link from 'next/link';
+import { getRegisteredSupportersCount } from '../data/api';
 
 const QUERY_ALL_PAGES = graphql`
   query HomePageQuery {
@@ -42,23 +43,27 @@ const QUERY_ALL_PAGES = graphql`
   }
 `;
 
-const Page = () => {
+const Page = ({ registeredSupportersCount }) => {
   const { data } = useQuery(QUERY_ALL_PAGES, {
     variables: { slug: "home" }
   });
 
   return (
     <Layout>
-      <Flex sx={{ m: 3, justifyContent: 'center' }}>
+      <Flex sx={{ m: 3, justifyContent: 'center', textAlign: 'center' }}>
         <Box sx={{ variant: 'page.narrow', bg: 'paleRed', color: 'white', p: 3, maxWidth: 500, borderRadius: 5 }}>
-          <Text sx={{ fontSize: [3, 4], textAlign: 'center', p: 2 }}>Get campaign updates</Text>
+          <Text sx={{ fontSize: [3, 4], p: 2 }}>Get campaign updates</Text>
+          {!!registeredSupportersCount && (
+            <Text sx={{ fontSize: [2, 3], pb: 2, opacity: 0.7 }}>
+              <u>{registeredSupportersCount}</u> / 2500 registered supporters goal
+            </Text>
+          )}
           <form method='GET' action='/signup'>
             <Input
               name='email'
               type='email'
               placeholder='Enter your email address'
               sx={{
-                textAlign: 'center',
                 border: '3px solid',
                 borderColor: 'indigo',
                 color: 'black',
@@ -132,4 +137,14 @@ const Page = () => {
   )
 };
 
-export default withApollo({ ssr: true })(Page)
+const _Page = withApollo({ ssr: true })(Page)
+
+const getInitialProps = _Page.getInitialProps
+
+_Page.getInitialProps = async (ctx) => {
+  const graphqlData = await getInitialProps(ctx)
+  const registeredSupportersCount = await getRegisteredSupportersCount()
+  return { ...graphqlData, registeredSupportersCount }
+}
+
+export default _Page

@@ -1,8 +1,5 @@
 import { schema, SchemaObject } from '../signup';
-import Airtable from 'airtable'
-const airtable = new Airtable({ apiKey: process.env.AIRTABLE_API_KEY })
-const base = airtable.base(process.env.AIRTABLE_MEMBERS_BASE_ID)
-const table = base(process.env.AIRTABLE_MEMBERS_BASE_TABLE_NAME)
+import table, { createRecords } from '../../lib/airtable';
 
 const translateFormToAirtableFields = (data: SchemaObject) => {
   const { region, isSupporter, ...d } = data
@@ -14,15 +11,6 @@ const translateFormToAirtableFields = (data: SchemaObject) => {
     dataSource: "Signed up via https://fwdmomentum.org"
   }
 }
-
-const createRecords = (table, rows: Array<{ fields: any }>) => new Promise((resolve, reject) => {
-  table.create(rows, function (err, records) {
-    if (err) {
-      reject(err)
-    }
-    resolve(records)
-  });
-})
 
 export default async (req, res) => {
   res.setHeader('Content-Type', 'application/json')
