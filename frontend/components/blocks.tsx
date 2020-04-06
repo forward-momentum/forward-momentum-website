@@ -49,8 +49,7 @@ export const BlockStream: React.FC<{
           return (
             <Box sx={{
               variant: 'page.narrow',
-              maxWidth: 500,
-              mb: 50
+              maxWidth: 500
             }}>
               <BlockSignupStarter block={block} />
             </Box>
@@ -164,9 +163,17 @@ const useRegisteredSupportersCount = (): (undefined | number) => {
 export const BlockSignupStarter: React.FC<{
   block: any
 }> = ({ block }) => {
+  const INPUT_OFFSET = 50
   const registeredSupportersCount = useRegisteredSupportersCount()
   return (
-    <Box sx={{ textAlign: 'center', bg: 'paleRed', color: 'white', p: 3, borderRadius: 5 }}>
+    <Box sx={{
+      textAlign: 'center',
+      bg: 'paleRed',
+      color: 'white',
+      p: 3,
+      borderRadius: 5,
+      mb: INPUT_OFFSET
+    }}>
       <Text sx={{ fontSize: [3, 4], p: 2 }}>{block.title}</Text>
       {!!registeredSupportersCount && (
         <Text sx={{ fontSize: [2, 3], pb: 2, opacity: 0.7, textAlign: 'center' }}>
@@ -185,7 +192,7 @@ export const BlockSignupStarter: React.FC<{
             color: 'black',
             bg: 'white',
             mt: 2,
-            mb: -50,
+            mb: -INPUT_OFFSET,
             boxShadow: 'box',
             fontSize: [3, 4],
             p: 3
