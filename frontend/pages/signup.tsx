@@ -5,7 +5,7 @@ import Layout from '../components/Layout';
 import { useForm, ErrorMessage, Controller } from "react-hook-form";
 import * as yup from 'yup'
 import { TextInput, fieldErrorStyle, IN } from '../components/form';
-import { Fragment } from 'react';
+import { Fragment, useState, useEffect } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { registerSupporter } from '../data/api';
@@ -72,11 +72,14 @@ const SignUp = () => {
   const router = useRouter()
   const defaultValues = schema.cast(router.query)
 
-  const { register, handleSubmit, watch, errors, control } = useForm({
+  const { register, handleSubmit, watch, errors, control, formState } = useForm({
     validationSchema: schema,
     defaultValues
   });
 
+  const [successfullySubmitted, setSuccessfullySubmitted] = useState(false)
+
+  const hasErrors = Object.keys(errors).length > 0
   const d = watch()
 
   type ArgumentTypes<F extends Function> = F extends (...args: infer A) => any ? A : never;
@@ -84,16 +87,28 @@ const SignUp = () => {
 
   const onSubmit = async (data: Fields) => {
     try {
+      schema.validate(data)
       if (schema.isValid(data)) {
         const res = await registerSupporter(data)
         if (!res.ok) throw new Error("Not OK response from server")
         const d = await res.json()
         if (!d.success) throw new Error("Failure to record signup. " + d.error)
+        setSuccessfullySubmitted(true)
       }
     } catch (e) {
       console.error(e)
     }
   }
+
+  useEffect(() => {
+    if (formState.isSubmitted && successfullySubmitted) {
+      const { firstName, consentToEmail, consentToMessaging, consentToPhone } = d
+      router.push({
+        pathname: '/share',
+        query: { firstName, consentToEmail, consentToMessaging, consentToPhone }
+      })
+    }
+  }, [router, formState.submitCount, successfullySubmitted])
 
   return (
     <Layout>
@@ -177,9 +192,9 @@ const SignUp = () => {
               <span>Phone call</span>
             </Label>
 
-            <Button type="submit" sx={{ mt: 3, fontSize: 4, fontWeight: 700, width: '100%' }}>
-              Complete
-          </Button>
+            <Button disabled={hasErrors || formState.isSubmitting} type="submit" sx={{ mt: 3, fontSize: 4, fontWeight: 700, width: '100%' }}>
+              {hasErrors ? 'Fix your answers' : formState.isSubmitting ? 'Sending...' : 'Complete'}
+            </Button>
           </form>
         </Box>
       </Box>

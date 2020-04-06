@@ -1,7 +1,8 @@
 /** @jsx jsx */
-import { jsx, Box, Flex, Styled } from 'theme-ui';
+import { jsx, Box, Styled } from 'theme-ui';
 import { useQuery } from '@apollo/react-hooks';
 import graphql from 'graphql-tag';
+import { Fragment } from 'react';
 
 const QUERY_CONTACT_DETAILS = graphql`
   query ContactDetailsQuery {
@@ -18,16 +19,16 @@ const Contacts = () => {
   const { data, loading, error } = useQuery(QUERY_CONTACT_DETAILS)
 
   return (
-    <Flex sx={{ flexWrap: 'wrap', justifyContent: 'flex-end' }}>
+    <Fragment>
       {data?.websiteInformation?.contacts?.map(({ name, address }, i) => {
         return (
-          <Box key={i} sx={{ pl: [4, 4, 5] }}>
+          <Box key={i} sx={{ px: [3, 4] }}>
             <div>{name}</div>
             <Styled.a href={`mailto:${address}`}>{address}</Styled.a>
           </Box>
         )
       })}
-    </Flex>
+    </Fragment>
   )
 }
 
