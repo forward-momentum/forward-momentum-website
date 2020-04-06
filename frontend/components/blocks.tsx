@@ -228,18 +228,18 @@ export const BlockLinkBox: React.FC<{
   const signupFormInReferencedPage = block.page?.content.find(pageBlock => pageBlock.__typename === BlockType.ComponentAtomsSignUpForm)
 
   return (
-    <Link href={block.alternativeURL || slug(block.page.slug)}>
-      <Box sx={{
-        transition: 'all 0.2s ease',
-        ':hover': {
-          transform: 'translateY(-10px)'
-        },
-        m: 3,
-        width: '100%'
-      }}>
-        {!!signupFormInReferencedPage ? (
-          <BlockSignupStarter block={{ title: signupFormInReferencedPage.title }} />
-        ) : (
+    <Box sx={{
+      transition: 'all 0.2s ease',
+      ':hover': {
+        transform: 'translateY(-10px)'
+      },
+      m: 3,
+      width: '100%'
+    }}>
+      {!!signupFormInReferencedPage ? (
+        <BlockSignupStarter block={{ title: signupFormInReferencedPage.title }} />
+      ) : (
+          <Link href={block.alternativeURL || slug(block.page.slug)}>
             <Box className='linkBox' sx={{
               color: 'white',
               textAlign: 'center',
@@ -251,8 +251,8 @@ export const BlockLinkBox: React.FC<{
               <Heading>{block.heading}</Heading>
               <Text>{block.summaryText}</Text>
             </Box>
-          )}
-      </Box>
-    </Link>
+          </Link>
+        )}
+    </Box>
   )
 }
