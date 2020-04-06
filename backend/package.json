@@ -23,6 +23,7 @@
     "strapi-plugin-graphql": "3.0.0-beta.19.5",
     "strapi-plugin-upload": "3.0.0-beta.19.5",
     "strapi-plugin-users-permissions": "3.0.0-beta.19.5",
+    "strapi-provider-upload-google-cloud-storage": "^3.0.0-beta.18.8",
     "strapi-utils": "3.0.0-beta.19.5",
     "url": "^0.11.0"
   },
