@@ -1,7 +1,7 @@
 'use strict';
 
 /**
- * Lifecycle callbacks for the `external-links` model.
+ * Lifecycle callbacks for the `blog` model.
  */
 
 module.exports = {

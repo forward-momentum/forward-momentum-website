@@ -23,7 +23,8 @@
         "atoms.learn-more-button",
         "atoms.medium-heading",
         "atoms.sign-up-form",
-        "atoms.html"
+        "atoms.html",
+        "page.blog-list"
       ]
     },
     "title": {
@@ -35,14 +36,9 @@
       "plugin": "upload",
       "required": false
     },
-    "tags": {
-      "collection": "tag",
-      "via": "pages"
-    },
     "slug": {
-      "type": "string",
-      "unique": true,
-      "required": true
+      "type": "uid",
+      "targetField": "title"
     }
   }
 }

@@ -19,7 +19,10 @@
         "atoms.document",
         "atoms.big-heading",
         "page.link-boxes",
-        "atoms.html"
+        "atoms.html",
+        "page.blog-list",
+        "atoms.signup-starter",
+        "atoms.sign-up-form"
       ]
     }
   }

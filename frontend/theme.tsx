@@ -32,6 +32,14 @@ export default {
     heading: 700,
     bold: 700,
   },
+  text: {
+    big: {
+      fontSize: '1.7rem'
+    },
+    medium: {
+      fontSize: '1.3rem'
+    }
+  },
   buttons: {
     primary: {
       cursor: 'pointer',
@@ -87,7 +95,12 @@ export default {
       'line-height': '0',
     }
   },
-
+  hoverable: {
+    transition: 'all 0.2s ease',
+    ':hover': {
+      transform: 'translateY(-10px)'
+    },
+  },
   forms: {
     heading: {
       variant: 'headings.3',

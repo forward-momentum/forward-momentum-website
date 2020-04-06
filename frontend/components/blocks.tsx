@@ -1,5 +1,5 @@
 /** @jsx jsx */
-import { jsx, Box, Text, Flex, Image, Input, Heading } from 'theme-ui';
+import { jsx, Box, Text, Flex, Image, Input, Heading, Button, Styled } from 'theme-ui';
 import Link from 'next/link';
 import Markdown from 'react-markdown';
 import { Fragment } from 'react';
@@ -7,8 +7,10 @@ import { useQuery } from '@apollo/react-hooks';
 import graphql from 'graphql-tag';
 import slug from 'slug'
 import SignUp from './SignupForm';
+import { formatRelative } from 'date-fns'
 
 enum BlockType {
+  'ComponentPageBlogList' = 'ComponentPageBlogList',
   'ComponentAtomsSignupStarter' = 'ComponentAtomsSignupStarter',
   'ComponentAtomsSignUpForm' = 'ComponentAtomsSignUpForm',
   'ComponentPageLinkBoxes' = 'ComponentPageLinkBoxes',
@@ -30,6 +32,10 @@ export const BlockStream: React.FC<{
   return (
     <Fragment>
       {blocks?.map((block, i) => {
+        if (block.__typename === 'ComponentPageBlogList') {
+          return <BlockBlogList key={i} block={block} />
+        }
+
         if (block.__typename === 'ComponentPageLinkBoxes') {
           return <BlockLinkBoxes key={i} block={block} />
         }
@@ -90,7 +96,7 @@ export const BlockRichText: React.FC<{
   block: any
 }> = ({ block }) => {
   return (
-    <Text variant='big'>
+    <Text variant='medium'>
       <Markdown source={block.value} />
     </Text>
   )
@@ -230,10 +236,7 @@ export const BlockLinkBox: React.FC<{
 
   return (
     <Box sx={{
-      transition: 'all 0.2s ease',
-      ':hover': {
-        transform: 'translateY(-10px)'
-      },
+      variant: 'hoverable',
       m: 3,
       width: '100%'
     }}>
@@ -257,3 +260,109 @@ export const BlockLinkBox: React.FC<{
     </Box>
   )
 }
+
+const QUERY_BLOG_PAGES = graphql`
+  query RegisteredSupportersCount {
+    blogs {
+      id
+      slug
+      title
+      description
+      created_at
+      image {
+        url
+      }   
+    }
+  }
+`;
+
+const useBlogList = () => {
+  const { data, error, loading } = useQuery(QUERY_BLOG_PAGES);
+  if (!data) return
+  return data.blogs
+}
+
+export const BlockBlogList: React.FC<{
+  block: any
+}> = ({ block }) => {
+  const articles = useBlogList()
+  return (
+    <Fragment>
+      {articles?.map((a) => (
+        <BlogPreview key={a.id} article={a} />
+      ))}
+    </Fragment>
+  )
+}
+
+export const BlogPreview: React.FC<{
+  article: {
+    slug: string
+    title: string
+    description: string
+    created_at: string
+    text: string
+    image: {
+      url: string
+    }
+  }
+}> = ({
+  article: {
+    slug,
+    title,
+    description,
+    created_at,
+    image
+  }
+}) => {
+    const link = {
+      href: `/blog/[slug]`,
+      as: `/blog/${slug}`
+    }
+    return (
+      <Link {...link}>
+        <Flex sx={{
+          flexDirection: ['column', 'row'],
+          justifyContent: 'start',
+          alignContent: 'start',
+          cursor: 'pointer',
+          variant: 'hoverable'
+        }}>
+          {image && (
+            <Box sx={{
+              borderRadius: 5,
+              boxShadow: 'box',
+              width: ['100%', '20%'],
+              height: [200, 150],
+              backgroundImage: `url(${process.env.CMS_URL + image.url})`,
+              backgroundPosition: 'center',
+              backgroundSize: 'cover',
+              mb: [3, 4],
+              mr: [0, 3]
+            }} />
+          )}
+          <Box>
+            <Box sx={{
+              textAlign: 'left',
+              opacity: 0.5,
+              my: 1,
+            }}>
+              {formatRelative(new Date(created_at), new Date())}
+            </Box>
+            <Heading sx={{
+              variant: 'h3',
+              textAlign: 'left',
+              fontSize: [3, 4],
+              my: 1
+            }}>{title}</Heading>
+            <Text sx={{
+              my: 1
+            }}>{description}</Text>
+            <Link {...link}>
+              <Styled.a>Read on &rarr;</Styled.a>
+            </Link>
+          </Box>
+        </Flex>
+      </Link>
+    )
+  }

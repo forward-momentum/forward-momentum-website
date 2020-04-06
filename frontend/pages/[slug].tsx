@@ -4,9 +4,9 @@ import { withApollo } from '../lib/apollo'
 import graphql from 'graphql-tag';
 import { useQuery } from '@apollo/react-hooks';
 import { useRouter } from 'next/router';
-import DefaultPage from '../components/Page';
 import { BlockStream } from '../components/blocks';
 import Layout from '../components/Layout';
+import SEO from '../components/SEO';
 
 const QUERY_PAGE = graphql`
   query GenericPage($slug: String!) {
@@ -90,9 +90,10 @@ const Page = () => {
 
   return (
     <Layout>
+      <SEO shareCardHeadline={page.title} />
       <Box sx={{ px: [4, 4], py: [2, 3], variant: 'page.block' }}>
         <Box sx={{ variant: 'page.width' }}>
-          <BlockStream blocks={data?.pages?.[0]?.content} />
+          <BlockStream blocks={page.content} />
         </Box>
       </Box>
     </Layout>

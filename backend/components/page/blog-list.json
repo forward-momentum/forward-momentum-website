@@ -1,0 +1,15 @@
+{
+  "connection": "default",
+  "collectionName": "components_page_blog_lists",
+  "info": {
+    "name": "BlogList",
+    "icon": "th-list"
+  },
+  "options": {},
+  "attributes": {
+    "title": {
+      "type": "string",
+      "required": true
+    }
+  }
+}
