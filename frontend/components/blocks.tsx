@@ -163,7 +163,6 @@ const useRegisteredSupportersCount = (): (undefined | number) => {
 export const BlockSignupStarter: React.FC<{
   block: any
 }> = ({ block }) => {
-  const INPUT_OFFSET = 50
   const registeredSupportersCount = useRegisteredSupportersCount()
   return (
     <Box sx={{
@@ -172,7 +171,7 @@ export const BlockSignupStarter: React.FC<{
       color: 'white',
       p: 3,
       borderRadius: 5,
-      mb: INPUT_OFFSET
+      mb: 35
     }}>
       <Text sx={{ fontSize: [3, 4], p: 2 }}>{block.title}</Text>
       {!!registeredSupportersCount && (
@@ -192,7 +191,7 @@ export const BlockSignupStarter: React.FC<{
             color: 'black',
             bg: 'white',
             mt: 2,
-            mb: -INPUT_OFFSET,
+            mb: -50,
             boxShadow: 'box',
             fontSize: [3, 4],
             p: 3
@@ -244,7 +243,8 @@ export const BlockLinkBox: React.FC<{
   return (
     <Box sx={{
       variant: 'hoverable',
-      m: 3,
+      mx: [0, 3],
+      my: 3,
       width: '100%'
     }}>
       {!!signupFormInReferencedPage ? (
