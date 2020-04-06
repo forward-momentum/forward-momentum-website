@@ -8,6 +8,7 @@ import SEO from '../../components/SEO';
 import Layout from '../../components/Layout';
 import { formatRelative } from 'date-fns';
 import Markdown from 'react-markdown';
+import { filePath } from '../../data/file';
 
 const BLOG_PAGE = graphql`
   query BlogPage($slug: String!) {
@@ -75,7 +76,7 @@ const Page = () => {
               boxShadow: 'box',
               width: '100%',
               height: 300,
-              backgroundImage: `url(${process.env.CMS_URL + image.url})`,
+              backgroundImage: `url(${filePath(image.url)})`,
               backgroundPosition: 'center',
               backgroundSize: 'cover',
               my: [3, 4]

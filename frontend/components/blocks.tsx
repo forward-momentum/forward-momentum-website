@@ -8,6 +8,7 @@ import graphql from 'graphql-tag';
 import slug from 'slug'
 import SignUp from './SignupForm';
 import { formatRelative } from 'date-fns'
+import { filePath } from '../data/file';
 
 enum BlockType {
   'ComponentPageBlogList' = 'ComponentPageBlogList',
@@ -126,7 +127,7 @@ export const BlockImage: React.FC<{
   return (
     <Box>
       <Box>
-        <Image src={process.env.CMS_URL + block.image.url} />
+        <Image src={filePath(block.image.url)} />
         {block.caption && <Text sx={{ fontSize: 1, opacity: 0.5, pt: 2 }}>{block.caption}</Text>}
       </Box>
     </Box>
@@ -138,7 +139,7 @@ export const BlockDocument: React.FC<{
 }> = ({ block }) => {
   return (
     <Box>
-      <Link href={(process.env.CMS_URL + block.file.url) || "/"}>
+      <Link href={(filePath(block.file.url)) || "/"}>
         <Flex sx={{ border: '1px solid black', p: 3, flexDirection: 'column' }}>
           <Text sx={{ fontSize: 1 }}>Document</Text>
           <Text sx={{ fontSize: 2 }}>{block.caption}</Text>
@@ -341,7 +342,7 @@ export const BlogPreview: React.FC<{
               boxShadow: 'box',
               width: ['100%', '20%'],
               height: [166, 150],
-              backgroundImage: `url(${process.env.CMS_URL + image.url})`,
+              backgroundImage: `url(${filePath(image.url)})`,
               backgroundPosition: 'center',
               backgroundSize: 'cover',
               mb: [3, 4],

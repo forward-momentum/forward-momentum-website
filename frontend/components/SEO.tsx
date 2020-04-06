@@ -2,6 +2,7 @@ import React, { Fragment } from "react"
 import { useQuery } from '@apollo/react-hooks';
 import graphql from 'graphql-tag';
 import Head from "next/head";
+import { filePath } from "../data/file";
 
 const QUERY_WEBSITE_INFO = graphql`
   query WebsiteInfoQuery {
@@ -39,7 +40,7 @@ const SEO: React.FC<{
     const _twitterHandle = twitterHandle || site?.twitterHandle
     const _shareCardHeadline = shareCardHeadline || site?.shareCardHeadline
     const _shareCardDescription = shareCardDescription || site?.shareCardDescription
-    const _shareCardImageUrl = shareCardImageUrl || `${process.env.CMS_URL}${shareCardImagePath || site?.shareCardImage?.url}`
+    const _shareCardImageUrl = shareCardImageUrl || `${filePath(shareCardImagePath || site?.shareCardImage?.url)}`
 
     return (
       <Head>

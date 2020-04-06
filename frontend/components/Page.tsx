@@ -1,6 +1,7 @@
 /** @jsx jsx */
 import { jsx, Heading, Image, Styled } from 'theme-ui';
 import { ContentWrapper } from './elements';
+import { filePath } from '../data/file';
 
 const DefaultPage: React.FC<{
   page: any
@@ -9,7 +10,7 @@ const DefaultPage: React.FC<{
     <ContentWrapper>
       <Heading>{page?.title}</Heading>
       {/* <Styled.pre>{JSON.stringify({ data, loading, error }, null, 2)}</Styled.pre> */}
-      {page?.share_image && <Image src={process.env.CMS_URL + page.share_image.url} sx={{
+      {page?.share_image && <Image src={filePath(page.share_image.url)} sx={{
         width: 200,
       }} />}
       {page?.content.map((d, i) =>
