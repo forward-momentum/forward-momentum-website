@@ -85,7 +85,7 @@ const Page = () => {
   const page = data?.pages?.[0]
 
   if (!page) {
-    return <Heading>loading...</Heading>;
+    return <Layout>{null}</Layout>;
   }
 
   return (

@@ -37,7 +37,7 @@ const Page = () => {
   const blog = data?.blogs?.[0]
 
   if (!blog) {
-    return <Heading>loading...</Heading>;
+    return <Layout>{null}</Layout>;
   }
 
   const {
