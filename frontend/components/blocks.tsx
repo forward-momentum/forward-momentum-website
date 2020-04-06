@@ -43,7 +43,8 @@ export const BlockStream: React.FC<{
           return (
             <Box sx={{
               variant: 'page.narrow',
-              maxWidth: 500
+              maxWidth: 500,
+              mb: 50
             }}>
               <BlockSignupStarter block={block} />
             </Box>
