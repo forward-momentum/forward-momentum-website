@@ -340,7 +340,7 @@ export const BlogPreview: React.FC<{
               borderRadius: 5,
               boxShadow: 'box',
               width: ['100%', '20%'],
-              height: [200, 150],
+              height: [166, 150],
               backgroundImage: `url(${process.env.CMS_URL + image.url})`,
               backgroundPosition: 'center',
               backgroundSize: 'cover',

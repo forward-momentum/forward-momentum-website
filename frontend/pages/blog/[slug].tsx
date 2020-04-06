@@ -55,7 +55,7 @@ const Page = () => {
         shareCardHeadline={blog.title}
         shareCardDescription={blog.description}
       />
-      <Box sx={{ px: [4, 4], py: [2, 3], variant: 'page.block' }}>
+      <Box sx={{ py: [2, 3], variant: 'page.block' }}>
         <Box sx={{ variant: 'page.width' }}>
           <Heading sx={{
             textAlign: 'center',

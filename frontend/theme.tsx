@@ -34,7 +34,7 @@ export default {
   },
   text: {
     big: {
-      fontSize: '1.7rem'
+      fontSize: '1.7rem',
     },
     medium: {
       fontSize: '1.3rem'
@@ -51,7 +51,7 @@ export default {
     block: {
       mb: [1, 2],
       mt: [1, 2],
-      mx: 3
+      mx: [3, 4, 5]
     },
     width: {
       mx: 'auto',
@@ -69,9 +69,9 @@ export default {
     'vertical-align': 'middle',
     'font-size': '60px',
     'background': 'white',
-    'border': '2px solid red',
-    'width': '25px',
-    'height': '25px',
+    'border': '1px solid black',
+    'width': '30px',
+    'height': '30px',
     'border-radius': '20%',
     'display': 'inline-flex',
     'justify-content': 'center',
@@ -87,7 +87,7 @@ export default {
     '&:checked:after': {
       'content': '""',
       display: 'block',
-      bg: 'red',
+      bg: 'black',
       'border-radius': '20%',
       'transform': 'translate(0, 0)',
       'height': '70%',
@@ -102,6 +102,14 @@ export default {
     },
   },
   forms: {
+    input: {
+      p: [3, 3],
+      fontSize: [3, 3]
+    },
+    select: {
+      p: [3, 3],
+      fontSize: [3, 3]
+    },
     heading: {
       variant: 'headings.3',
       marginBottom: '0.5em',
@@ -146,9 +154,9 @@ export default {
     'vertical-align': 'middle',
     'font-size': '60px',
     'background': 'white',
-    'border': '2px solid red',
-    'width': '25px',
-    'height': '25px',
+    'border': '1px solid black',
+    'width': '30px',
+    'height': '30px',
     'border-radius': '100%',
     'display': 'inline-flex',
     'justify-content': 'center',
@@ -164,7 +172,7 @@ export default {
     '&:checked:after': {
       'content': '""',
       display: 'block',
-      bg: 'red',
+      bg: 'black',
       'border-radius': '100%',
       'transform': 'translate(0, 0)',
       'height': '70%',

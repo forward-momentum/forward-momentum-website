@@ -91,7 +91,7 @@ const Page = () => {
   return (
     <Layout>
       <SEO shareCardHeadline={page.title} />
-      <Box sx={{ px: [4, 4], py: [2, 3], variant: 'page.block' }}>
+      <Box sx={{ py: [2, 3], variant: 'page.block' }}>
         <Box sx={{ variant: 'page.width' }}>
           <BlockStream blocks={page.content} />
         </Box>

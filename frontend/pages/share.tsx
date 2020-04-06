@@ -15,7 +15,7 @@ const SignUp = () => {
     <Layout>
       <Box sx={{ variant: 'page.block', fontSize: 3 }}>
         <Box sx={{ variant: 'page.narrow' }}>
-          <Box sx={{ p: [2, 4], borderRadius: 6, border: [null, '3px solid'] }}>
+          <Box sx={{ textAlign: ['center'], p: [1, 4], borderRadius: 6, border: [null, '3px solid'] }}>
             <Heading>
               Thanks for signing up{firstName && ` ${firstName}`}!&nbsp;
               <Text sx={{ color: 'secondary', display: 'inline' }}>Now share the campaign in your network &rarr; build awareness and support</Text>

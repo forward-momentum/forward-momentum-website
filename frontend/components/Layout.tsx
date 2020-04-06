@@ -77,15 +77,15 @@ export const SocialShareLinks = ({ width = ['50%', '25%', null], fontSize = [1, 
   }
 
   return (
-    <Flex>
+    <Flex sx={{ flexWrap: 'wrap' }}>
       <Styled.a sx={{ width, color }} href={whatsAppShareUrl(share.url, share.message)}>
-        <Box sx={{ cursor: 'pointer', textAlign: 'center' }}>
+        <Box sx={{ cursor: 'pointer', textAlign: 'center', mb: [3, 0] }}>
           <IconWhatsapp sx={{ fontSize }} />
           <Text>Whatsapp</Text>
         </Box>
       </Styled.a>
       <Styled.a sx={{ width, color }} href={facebookShareUrl(share.url)}>
-        <Box sx={{ cursor: 'pointer', textAlign: 'center' }}>
+        <Box sx={{ cursor: 'pointer', textAlign: 'center', mb: [3, 0] }}>
           <IconFacebook sx={{ fontSize }} />
           <Text>Facebook</Text>
         </Box>
