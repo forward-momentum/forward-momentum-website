@@ -70,11 +70,11 @@ export type SchemaObject = yup.InferType<typeof schema>
 
 const SignUp = () => {
   const router = useRouter()
-  const { email } = router.query
+  const defaultValues = schema.cast(router.query)
 
   const { register, handleSubmit, watch, errors, control } = useForm({
     validationSchema: schema,
-    defaultValues: { email } as SchemaObject
+    defaultValues
   });
 
   const d = watch()
