@@ -31,7 +31,7 @@
     "contacts": {
       "type": "component",
       "repeatable": true,
-      "component": "atoms.contact"
+      "component": "niche.contact"
     },
     "slug": {
       "type": "string"

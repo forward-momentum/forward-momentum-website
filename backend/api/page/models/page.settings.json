@@ -22,7 +22,8 @@
         "atoms.rich-text",
         "atoms.learn-more-button",
         "atoms.medium-heading",
-        "atoms.sign-up-form"
+        "atoms.sign-up-form",
+        "atoms.html"
       ]
     },
     "title": {

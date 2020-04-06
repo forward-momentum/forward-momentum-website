@@ -1,0 +1,14 @@
+{
+  "connection": "default",
+  "collectionName": "components_atoms_htmls",
+  "info": {
+    "name": "HTML",
+    "icon": "code"
+  },
+  "options": {},
+  "attributes": {
+    "html": {
+      "type": "text"
+    }
+  }
+}

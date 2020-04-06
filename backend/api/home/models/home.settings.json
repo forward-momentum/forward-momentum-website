@@ -18,7 +18,8 @@
         "atoms.image",
         "atoms.document",
         "atoms.big-heading",
-        "page.link-boxes"
+        "page.link-boxes",
+        "atoms.html"
       ]
     }
   }

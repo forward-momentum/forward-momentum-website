@@ -14,7 +14,7 @@ enum BlockType {
   'ComponentPageLinkBoxes' = 'ComponentPageLinkBoxes',
   'ComponentPageLinkBoxItem' = 'ComponentPageLinkBoxItem',
   'ComponentAtomsRichText' = 'ComponentAtomsRichText',
-  'ComponentAtomsHTML' = 'ComponentAtomsHTML',
+  'ComponentAtomsHtml' = 'ComponentAtomsHtml',
   'ComponentAtomsLearnMoreButton' = 'ComponentAtomsLearnMoreButton',
   'ComponentAtomsImage' = 'ComponentAtomsImage',
   'ComponentAtomsDocument' = 'ComponentAtomsDocument',
@@ -58,7 +58,7 @@ export const BlockStream: React.FC<{
           return <BlockRichText key={i} block={block} />
         }
 
-        if (block.__typename === 'ComponentAtomsHTML') {
+        if (block.__typename === 'ComponentAtomsHtml') {
           return <BlockHTML key={i} block={block} />
         }
 

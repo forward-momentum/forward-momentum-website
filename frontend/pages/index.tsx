@@ -54,6 +54,9 @@ const QUERY_ALL_PAGES = graphql`
             size
           }
         }
+        ... on ComponentAtomsHtml {
+          html
+        }
       }
     }
   }
