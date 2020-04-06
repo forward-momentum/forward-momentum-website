@@ -27,10 +27,10 @@ export default {
     mono: 'IBM Plex Mono, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", sans-serif',
     heading: 'IBX Plex Sans, inherit',
   },
-  text: {
-    big: {
-      fontSize: '1.3rem'
-    }
+  fontWeights: {
+    body: 300,
+    heading: 700,
+    bold: 700,
   },
   buttons: {
     primary: {
