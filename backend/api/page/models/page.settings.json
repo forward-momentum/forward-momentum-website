@@ -13,7 +13,16 @@
     "content": {
       "type": "dynamiczone",
       "components": [
-        "atoms.text"
+        "atoms.signup-starter",
+        "page.link-boxes",
+        "page.link-box-item",
+        "atoms.document",
+        "atoms.big-heading",
+        "atoms.image",
+        "atoms.rich-text",
+        "atoms.learn-more-button",
+        "atoms.medium-heading",
+        "atoms.sign-up-form"
       ]
     },
     "title": {

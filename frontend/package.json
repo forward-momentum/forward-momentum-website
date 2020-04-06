@@ -30,6 +30,7 @@
     "react-icons": "^3.9.0",
     "react-markdown": "^4.3.1",
     "redis": "^3.0.2",
+    "slug": "^2.1.1",
     "theme-ui": "^0.3.1",
     "url": "^0.11.0",
     "util": "^0.12.2",

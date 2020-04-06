@@ -1,4 +1,4 @@
-import { SchemaObject } from '../pages/signup';
+import { SchemaObject } from '../components/SignupForm';
 
 export const registerSupporter = async (data: SchemaObject) => {
   return await fetch('/api/registerSupporter', {

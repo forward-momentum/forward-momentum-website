@@ -6,6 +6,7 @@ import {
 import { HttpLink } from "apollo-link-http";
 import fetch from "isomorphic-unfetch";
 import introspectionQueryResultData from "./schema";
+import { getRegisteredSupportersCount } from "./data/api";
 
 /**
 query introspectionQueryResultData {
@@ -36,5 +37,12 @@ export default function createApolloClient(initialState, ctx) {
         introspectionQueryResultData,
       }),
     }).restore(initialState),
+    resolvers: {
+      Query: {
+        registeredSupportersCount: async (root, args, context, info) => {
+          return getRegisteredSupportersCount();
+        },
+      },
+    },
   });
 }

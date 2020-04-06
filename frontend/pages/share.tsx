@@ -3,8 +3,8 @@ import { jsx, Box, Heading, Text } from 'theme-ui';
 import { withApollo } from '../lib/apollo';
 import Layout, { Spacer } from '../components/Layout';
 import { useRouter } from 'next/router';
-import { schema } from './signup';
 import { SocialShareLinks } from '../components/Layout';
+import { schema } from '../components/SignupForm';
 
 const SignUp = () => {
   const router = useRouter()

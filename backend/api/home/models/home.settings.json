@@ -17,7 +17,8 @@
         "atoms.learn-more-button",
         "atoms.image",
         "atoms.document",
-        "atoms.big-heading"
+        "atoms.big-heading",
+        "page.link-boxes"
       ]
     }
   }

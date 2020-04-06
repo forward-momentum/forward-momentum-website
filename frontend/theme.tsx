@@ -18,6 +18,9 @@ export default {
       },
     },
   },
+  shadows: {
+    box: '0px 5px 10px rgba(0,0,0,0.1)'
+  },
   fonts: {
     body:
       'IBM Plex Sans, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", sans-serif',

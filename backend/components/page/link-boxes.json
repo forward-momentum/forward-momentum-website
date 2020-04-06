@@ -1,0 +1,16 @@
+{
+  "connection": "default",
+  "collectionName": "components_page_link_boxes",
+  "info": {
+    "name": "LinkBoxes",
+    "icon": "boxes"
+  },
+  "options": {},
+  "attributes": {
+    "LinkBoxItem": {
+      "type": "component",
+      "repeatable": true,
+      "component": "page.link-box-item"
+    }
+  }
+}

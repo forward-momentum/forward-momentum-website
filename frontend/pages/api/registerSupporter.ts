@@ -1,4 +1,4 @@
-import { schema, SchemaObject } from '../signup';
+import { SchemaObject, schema } from '../../components/SignupForm';
 import table, { createRecords } from '../../lib/airtable';
 
 const translateFormToAirtableFields = (data: SchemaObject) => {
