@@ -1,5 +1,5 @@
 /** @jsx jsx */
-import { jsx, Box } from 'theme-ui';
+import { jsx, Box, Button, useColorMode } from 'theme-ui';
 import { Fragment } from "react"
 import SEO from './SEO';
 import Contacts from './Contacts';
@@ -20,6 +20,7 @@ export default ({ children }) => {
 }
 
 const Header = () => {
+  const [colorMode, setColorMode] = useColorMode()
   return (
     <Box sx={{ textAlign: 'center', pt: [4, 5, 6], pb: [2, 4, 5], px: [4, 4], variant: 'page.block' }}>
       <Box sx={{ variant: 'page.width' }}>
@@ -33,6 +34,10 @@ const Header = () => {
               }
             }} />
           </Link>
+          <Button
+            onClick={() => setColorMode(colorMode === 'light' ? 'dark' : 'light')}>
+            Toggle {colorMode === 'light' ? 'Dark' : 'Light'}
+          </Button>
         </Box>
       </Box>
     </Box>

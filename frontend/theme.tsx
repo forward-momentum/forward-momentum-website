@@ -15,8 +15,6 @@ export default {
       dark: {
         text: '#fff',
         background: '#222',
-        primary: theme => theme.colors.red,
-        secondary: theme => theme.colors.indigo,
       },
     },
   },
@@ -102,7 +100,6 @@ export default {
       mb: '0.1em'
     },
     label: {
-      color: 'black',
       transition: "all 250ms ease-in-out",
       variant: 'headings.5',
       marginTop: '1.25em',
