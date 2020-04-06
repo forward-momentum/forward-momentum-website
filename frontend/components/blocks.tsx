@@ -172,6 +172,7 @@ export const BlockSignupStarter: React.FC<{
           type='email'
           placeholder='Enter your email address'
           sx={{
+            textAlign: 'center',
             border: '3px solid',
             borderColor: 'indigo',
             color: 'black',
@@ -179,7 +180,7 @@ export const BlockSignupStarter: React.FC<{
             mt: 2,
             mb: -50,
             boxShadow: 'box',
-            fontSize: [3, 5],
+            fontSize: [3, 4],
             p: 3
           }}
         />
