@@ -23,7 +23,7 @@ const Contacts = () => {
         return (
           <Box key={i} sx={{ pl: [4, 4, 5] }}>
             <div>{name}</div>
-            <Styled.a sx={{ color: 'white' }} href={`mailto:${address}`}>{address}</Styled.a>
+            <Styled.a href={`mailto:${address}`}>{address}</Styled.a>
           </Box>
         )
       })}
