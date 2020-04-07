@@ -10,7 +10,7 @@ class MyDocument extends Document {
 
   render() {
     return (
-      <Html>
+      <Html lang='en-GB'>
         <Head>
           <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono&family=IBM+Plex+Sans:wght@300;600&display=swap" rel="stylesheet" />
           <link rel="icon" type="image/x-icon" href="/favicon.png" />

@@ -9,6 +9,7 @@ import Layout from '../../components/Layout';
 import { formatRelative } from 'date-fns';
 import Markdown from 'react-markdown';
 import { filePath } from '../../data/file';
+import Head from 'next/head';
 
 const BLOG_PAGE = graphql`
   query BlogPage($slug: String!) {
@@ -57,6 +58,9 @@ const Page = () => {
         shareCardHeadline={blog.title}
         shareCardDescription={blog.description}
       />
+      <Head>
+        <meta key='og:type' property="og:type" content="article" />
+      </Head>
       <Box sx={{ py: [2, 3], variant: 'page.block' }}>
         <Box sx={{ variant: 'page.width' }}>
           <Heading sx={{
