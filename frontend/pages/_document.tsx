@@ -21,7 +21,7 @@ class MyDocument extends Document {
             function gtag(){dataLayer.push(arguments);}
             gtag('js', new Date());
 
-            gtag('config', ${process.env.GOOGLE_ANALYTICS_ID});
+            gtag('config', '${process.env.GOOGLE_ANALYTICS_ID}');
           `}} />
         </Head>
         <body>
