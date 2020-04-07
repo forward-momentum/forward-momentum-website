@@ -13,6 +13,9 @@ const QUERY_PAGE = graphql`
     pages(where: { slug: $slug }) {
       id
       title
+      share_image {
+        url
+      }
       content {
         __typename
         ... on ComponentAtomsSignupStarter {
@@ -90,7 +93,11 @@ const Page = () => {
 
   return (
     <Layout>
-      <SEO shareCardHeadline={page.title} />
+      <SEO
+        websiteTitle={page.title}
+        shareCardHeadline={page.title}
+        shareCardImagePath={page.share_image?.url}
+      />
       <Box sx={{ py: [2, 3], variant: 'page.block' }}>
         <Box sx={{ variant: 'page.width' }}>
           <BlockStream blocks={page.content} />

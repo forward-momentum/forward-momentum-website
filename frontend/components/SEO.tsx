@@ -36,7 +36,7 @@ const SEO: React.FC<{
     const { data, loading, error } = useQuery(QUERY_WEBSITE_INFO)
 
     const site = data?.websiteInformation
-    const _websiteTitle = websiteTitle || site?.websiteTitle
+    const _websiteTitle = websiteTitle ? `${websiteTitle} | ${site?.websiteTitle}` : site?.websiteTitle
     const _twitterHandle = twitterHandle || site?.twitterHandle
     const _shareCardHeadline = shareCardHeadline || site?.shareCardHeadline
     const _shareCardDescription = shareCardDescription || site?.shareCardDescription
@@ -44,6 +44,7 @@ const SEO: React.FC<{
 
     return (
       <Head>
+        <title>{_websiteTitle}</title>
         <meta name="description" content={_shareCardDescription} />
         {/*  */}
         <meta property="og:title" content={_shareCardHeadline} />

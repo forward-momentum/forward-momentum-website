@@ -52,6 +52,7 @@ const Page = () => {
   return (
     <Layout>
       <SEO
+        websiteTitle={blog.title}
         shareCardImagePath={blog.image?.url}
         shareCardHeadline={blog.title}
         shareCardDescription={blog.description}
