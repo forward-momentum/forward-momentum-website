@@ -14,6 +14,15 @@ class MyDocument extends Document {
         <Head>
           <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono&family=IBM+Plex+Sans:wght@300;600&display=swap" rel="stylesheet" />
           <link rel="icon" type="image/x-icon" href="/favicon.png" />
+          <script async src="https://www.googletagmanager.com/gtag/js?id=UA-162923752-1" />
+          <script dangerouslySetInnerHTML={{
+            __html: `
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+
+            gtag('config', ${process.env.GOOGLE_ANALYTICS_ID});
+          `}} />
         </Head>
         <body>
           <InitializeColorMode />

@@ -11,5 +11,6 @@ module.exports = {
     PORT: parseInt(process.env.PORT || 3000),
     SITE_HOST: process.env.SITE_HOST || "localhost",
     SITE_URL: process.env.SITE_URL,
+    GOOGLE_ANALYTICS_ID: process.env.GOOGLE_ANALYTICS_ID,
   },
 };
