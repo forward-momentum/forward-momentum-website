@@ -64,6 +64,7 @@ const Header = forwardRef((props, ref) => {
           <Flex sx={{ justifyContent: 'space-between' }}>
             <Link href='/'>
               <Logo sx={{
+                height: 40,
                 width: ['50%', 150],
                 maxWidth: [125, 150],
                 cursor: 'pointer',
@@ -73,7 +74,8 @@ const Header = forwardRef((props, ref) => {
               }} />
             </Link>
             <Hamburger onClick={toggleNav} sx={{
-              width: [40],
+              height: [35, 40],
+              width: [35, 40],
               cursor: 'pointer',
               '* path': {
                 fill: 'white'
@@ -105,6 +107,8 @@ const Header = forwardRef((props, ref) => {
 })
 
 const Footer = () => {
+  const links = useNavLinks()
+
   return (
     <Box sx={{ fontFamily: 'mono', textAlign: 'center', color: 'red', p: [4, 4], variant: 'page.block' }}>
       <Box sx={{ variant: 'page.width' }}>
