@@ -1,13 +1,18 @@
 /** @jsx jsx */
 import { jsx, Box, Button, useColorMode, Styled, Text, Flex } from 'theme-ui';
-import { Fragment } from "react"
+import { Fragment, useState } from 'react';
 import SEO from './SEO';
 import Contacts from './Contacts';
 // @ts-ignore
 import Logo from '../public/logo.svg';
+// @ts-ignore
+import Hamburger from '../public/hamburger.svg';
 import Link from 'next/link';
 import { IconWhatsapp, IconFacebook, IconTwitter, IconEnvelope } from './icons';
 import { twitterShareUrl, emailShareUrl, facebookShareUrl, whatsAppShareUrl } from '../lib/social';
+import graphql from 'graphql-tag';
+import { useQuery } from '@apollo/react-hooks';
+import { ContentWrapper } from './elements';
 
 export default ({ children }) => {
   return (
@@ -21,11 +26,77 @@ export default ({ children }) => {
   )
 }
 
+const NAV_QUERY = graphql`
+  query NavLinks {
+    navigation {
+      navlink {
+        label
+        linkURL
+        page {
+          slug
+        }
+      }
+    }
+  }
+`
+
+const useNavLinks = () => {
+  const { data, loading, error } = useQuery(NAV_QUERY)
+  return data?.navigation?.navlink
+}
+
 const Header = () => {
-  const [colorMode, setColorMode] = useColorMode()
+  const links = useNavLinks()
+  const [navOpened, setNavOpened] = useState(false)
+  const toggleNav = () => setNavOpened(o => !o)
+
   return (
     <Fragment>
-      {/* TODO: Navigation */}
+      <Box sx={{
+        p: [2, 3],
+        position: 'fixed', top: 0, left: 0, width: '100%',
+        bg: 'red', color: 'white'
+      }}>
+        <ContentWrapper sx={{ width: '100%' }}>
+          <Flex sx={{ justifyContent: 'space-between' }}>
+            <Link href='/'>
+              <Logo sx={{
+                width: ['50%', 150],
+                maxWidth: [125, 150],
+                cursor: 'pointer',
+                '* path': {
+                  fill: 'white'
+                }
+              }} />
+            </Link>
+            <Hamburger onClick={toggleNav} sx={{
+              width: [40],
+              cursor: 'pointer',
+              '* path': {
+                fill: 'white'
+              }
+            }} />
+          </Flex>
+        </ContentWrapper>
+      </Box>
+      {navOpened && (
+        <Box sx={{
+          bg: 'red', color: 'white', position: 'fixed', top: 0, left: 0, width: '100%', height: '100%', overflowY: 'scroll',
+          fontSize: [3, 4], textAlign: 'center', p: [3, 5, 7]
+        }}>
+          <Box onClick={toggleNav} sx={{ borderBottom: '1px solid white', cursor: 'pointer' }}>&larr; Back</Box>
+          {links.map((l, i) => {
+            return (
+              <Box sx={{ my: [2, 4] }} key={i}>
+                <Styled.a href={l.page?.slug ? '/' + l.page?.slug : l.linkURL} sx={{
+                  color: 'white',
+                  textDecoration: 'none'
+                }}>{l.label}</Styled.a>
+              </Box>
+            )
+          })}
+        </Box>
+      )}
     </Fragment>
   )
 }

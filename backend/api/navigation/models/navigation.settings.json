@@ -1,0 +1,19 @@
+{
+  "kind": "singleType",
+  "connection": "default",
+  "collectionName": "navigations",
+  "info": {
+    "name": "navigation"
+  },
+  "options": {
+    "increments": true,
+    "timestamps": true
+  },
+  "attributes": {
+    "navlink": {
+      "type": "component",
+      "repeatable": true,
+      "component": "special.navlink"
+    }
+  }
+}

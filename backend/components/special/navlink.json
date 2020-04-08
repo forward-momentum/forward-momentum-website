@@ -1,0 +1,20 @@
+{
+  "connection": "default",
+  "collectionName": "components_special_navlinks",
+  "info": {
+    "name": "navlink",
+    "icon": "link"
+  },
+  "options": {},
+  "attributes": {
+    "label": {
+      "type": "string"
+    },
+    "linkURL": {
+      "type": "string"
+    },
+    "page": {
+      "model": "page"
+    }
+  }
+}
