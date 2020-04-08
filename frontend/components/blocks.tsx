@@ -46,7 +46,7 @@ const PaddedWrapper = ({ children }) => (
 export const BlockStream: React.FC<{
   blocks: Block[]
   wrap?: boolean
-}> = ({ blocks, wrap }) => {
+}> = ({ blocks, wrap = true }) => {
   const Wrapper = ({ children }) => wrap ? (
     <PaddedWrapper>{children}</PaddedWrapper>
   ) : (
@@ -54,14 +54,17 @@ export const BlockStream: React.FC<{
     )
 
   return (
-    <Wrapper>
+    <Fragment>
       {blocks?.map((block, i) => {
-        if (block.__typename === 'ComponentPageBlogList') {
-          return <BlockBlogList key={i} block={block} />
-        }
-
-        if (block.__typename === 'ComponentOrganismsSignupStarter') {
-          return (
+        let ch
+        if (
+          block.__typename === 'ComponentPageBlogList'
+        ) {
+          ch = <BlockBlogList key={i} block={block} />
+        } else if (
+          block.__typename === 'ComponentOrganismsSignupStarter'
+        ) {
+          ch = (
             <Box sx={{
               variant: 'page.narrow',
               maxWidth: 550,
@@ -70,48 +73,56 @@ export const BlockStream: React.FC<{
               <BlockSignupStarter block={block} />
             </Box>
           )
+        } else if (
+          block.__typename === 'ComponentSpecialSpecialVideoBlOck'
+        ) {
+          ch = <BlockSpecialVideo block={block} />
+        } else if (
+          block.__typename === 'ComponentOrganismsSignUpForm'
+        ) {
+          ch = <BlockSignupForm block={block} />
+        } else if (
+          block.__typename === 'ComponentAtomsHeading'
+        ) {
+          ch = <BlockHeading key={i} block={block} />
+        } else if (
+          block.__typename === 'ComponentAtomsRichText'
+        ) {
+          ch = <BlockRichText key={i} block={block} />
+        } else if (
+          block.__typename === 'ComponentAtomsHtml'
+        ) {
+          ch = <BlockHTML key={i} block={block} />
+        } else if (
+          block.__typename === 'ComponentOrganismsLearnMoreButton'
+        ) {
+          ch = <BlockLearnMoreButton key={i} block={block} />
+        } else if (
+          block.__typename === 'ComponentAtomsImage'
+        ) {
+          ch = <BlockImage key={i} block={block} />
+        } else if (
+          block.__typename === 'ComponentAtomsDocument'
+        ) {
+          ch = <BlockDocument key={i} block={block} />
+        } else if (
+          block.__typename === 'ComponentSpecialPageSectionPicker'
+        ) {
+          ch = <BlockPageSection key={i} block={block} />
+        } else if (
+          process.env.NODE_ENV !== 'production'
+        ) {
+          ch = <pre key={i}>{JSON.stringify(blocks, null, 2)}</pre>
         }
 
-        if (block.__typename === 'ComponentSpecialSpecialVideoBlOck') {
-          return <BlockSpecialVideo block={block} />
+        if (
+          wrap && !['ComponentSpecialPageSectionPicker', 'ComponentSpecialSpecialVideoBlOck'].includes(block.__typename)
+        ) {
+          return <Wrapper key={i}>{ch}</Wrapper>
+        } else {
+          return ch
         }
-
-        if (block.__typename === 'ComponentOrganismsSignUpForm') {
-          return <BlockSignupForm block={block} />
-        }
-
-        if (block.__typename === 'ComponentAtomsHeading') {
-          return <BlockHeading key={i} block={block} />
-        }
-
-        if (block.__typename === 'ComponentAtomsRichText') {
-          return <BlockRichText key={i} block={block} />
-        }
-
-        if (block.__typename === 'ComponentAtomsHtml') {
-          return <BlockHTML key={i} block={block} />
-        }
-
-        if (block.__typename === 'ComponentOrganismsLearnMoreButton') {
-          return <BlockLearnMoreButton key={i} block={block} />
-        }
-
-        if (block.__typename === 'ComponentAtomsImage') {
-          return <BlockImage key={i} block={block} />
-        }
-
-        if (block.__typename === 'ComponentAtomsDocument') {
-          return <BlockDocument key={i} block={block} />
-        }
-
-        if (block.__typename === 'ComponentSpecialPageSectionPicker') {
-          return <BlockPageSection key={i} block={block} />
-        }
-
-        if (process.env.NODE_ENV !== 'production') {
-          return <pre key={i}>{JSON.stringify(blocks, null, 2)}</pre>
-        }
-      })}</Wrapper>
+      })}</Fragment>
   )
 }
 

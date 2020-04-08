@@ -47,11 +47,7 @@ const Page = () => {
         shareCardHeadline={page.title}
         shareCardImagePath={page.share_image?.url}
       />
-      <Box sx={{ py: [2, 3], variant: 'page.block' }}>
-        <Box sx={{ variant: 'page.width' }}>
-          <BlockStream blocks={page.content} />
-        </Box>
-      </Box>
+      <BlockStream blocks={page.content} />
     </Layout>
   )
 };
