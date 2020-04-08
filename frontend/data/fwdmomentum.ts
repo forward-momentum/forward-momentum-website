@@ -27,6 +27,7 @@ export const schema = yup.object({
   region: yup
     .string()
     .oneOf([
+      "International",
       "Wales",
       "Northern Ireland",
       "Scotland",
