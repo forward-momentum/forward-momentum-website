@@ -24,10 +24,10 @@ const Fixed: React.FC<{
   additionalCss,
   ...props
 }) => {
-    const [ref, args] = useDimensions();
+    const [ref, { height }] = useDimensions();
 
     const placeholder = (
-      <div style={{ height: args.height }} />
+      <div style={{ height }} />
     );
 
     return (
@@ -35,6 +35,19 @@ const Fixed: React.FC<{
         {fixedIf && position === "bottom" && placeholder}
         {children(ref)}
         {fixedIf && position === "top" && placeholder}
+        <style>{`
+            h1[id]::before,
+            h2[id]::before,
+            h3[id]::before,
+            h4[id]::before,
+            h5[id]::before {
+                content: '';
+                display: block;
+                height: ${height + 20}px;
+                margin: -${height + 20}px 0 0;
+            }
+          `}
+        </style>
       </Fragment>
     );
   };

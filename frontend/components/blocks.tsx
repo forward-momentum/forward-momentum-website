@@ -1,7 +1,6 @@
 /** @jsx jsx */
 import { jsx, Box, Text, Flex, Image, Input, Heading, Button, Styled } from 'theme-ui';
 import Link from 'next/link';
-import Markdown from 'react-markdown';
 import { Fragment, useState } from 'react';
 import { useQuery } from '@apollo/react-hooks';
 import graphql from 'graphql-tag';
@@ -16,6 +15,7 @@ import YouTube from 'react-youtube';
 import {
   useWindowHeight,
 } from '@react-hook/window-size'
+import Markdown from './Markdown';
 
 enum BlockType {
   'ComponentSpecialSpecialVideoBlOck' = 'ComponentSpecialSpecialVideoBlOck',

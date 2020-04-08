@@ -7,9 +7,9 @@ import { withApollo } from '../../lib/apollo';
 import SEO from '../../components/SEO';
 import Layout from '../../components/Layout';
 import { formatRelative } from 'date-fns';
-import Markdown from 'react-markdown';
 import { filePath } from '../../data/file';
 import Head from 'next/head';
+import Markdown from '../../components/Markdown';
 
 const BLOG_PAGE = graphql`
   query BlogPage($slug: String!) {
