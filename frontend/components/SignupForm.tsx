@@ -7,6 +7,7 @@ import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { registerSupporter } from '../data/api';
 import { schema } from '../data/fwdmomentum';
+import { useAnalytics } from '../lib/analytics/browser';
 
 const SignUp = () => {
   const router = useRouter()
@@ -25,31 +26,28 @@ const SignUp = () => {
   type ArgumentTypes<F extends Function> = F extends (...args: infer A) => any ? A : never;
   type Fields = ArgumentTypes<ArgumentTypes<typeof handleSubmit>[0]>[0]
 
+  const analytics = useAnalytics()
+
+  const trackAttemptedSignup = (success = true) => {
+    analytics.trackEvent('attemptedSignup', {
+      'category': 'campaign',
+      'label': 'Clicked the sign-up send button',
+      'value': 'webform',
+      success
+    });
+  }
+
   const onSubmit = async (data: Fields) => {
-    try {
-      // @ts-ignore
-      gtag('event', 'attemptedSignup', {
-        'event_category': 'campaign',
-        'event_label': 'Clicked the sign-up send button',
-        'event_value': 'webform'
-      });
-    } catch (e) {
-      console.error("Google analytics was not set up")
-    }
+    trackAttemptedSignup(true)
 
     try {
       schema.validate(data)
       if (schema.isValid(data)) {
-        try {
-          // @ts-ignore
-          gtag('event', 'validSignup', {
-            'event_category': 'campaign',
-            'event_label': 'Submitted valid signup data',
-            'event_value': 'webform'
-          });
-        } catch (e) {
-          console.error("Google analytics was not set up")
-        }
+        analytics.trackEvent('validSignup', {
+          'category': 'campaign',
+          'label': 'Submitted valid signup data',
+          'value': 'webform'
+        });
 
         const res = await registerSupporter(data)
         if (!res.ok) throw new Error("Not OK response from server")
@@ -65,11 +63,10 @@ const SignUp = () => {
   useEffect(() => {
     if (formState.isSubmitted && successfullySubmitted) {
       const { firstName, consentToEmail, consentToMessaging, consentToPhone } = d
-      // @ts-ignore
-      gtag('event', 'successfulSignup', {
-        'event_category': 'campaign',
-        'event_label': 'Signup was successful',
-        'event_value': 'webform'
+      analytics.trackEvent('successfulSignup', {
+        'category': 'campaign',
+        'label': 'Signup was successful',
+        'value': 'webform',
       });
       router.push({
         pathname: '/share',
@@ -80,7 +77,9 @@ const SignUp = () => {
 
   return (
     <Box sx={{ variant: 'page.narrow' }}>
-      <form onSubmit={handleSubmit(onSubmit as any)}>
+      <form onSubmit={handleSubmit(onSubmit as any)} onInvalid={() => {
+        trackAttemptedSignup(false)
+      }}>
 
         <Label>{(schema.fields.isSupporter as any)._label}</Label>
         <Label variant='forms.checkboxOption' sx={{ lineHeight: '2em' }}>

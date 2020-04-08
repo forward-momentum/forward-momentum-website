@@ -16,6 +16,7 @@ import {
   useWindowHeight,
 } from '@react-hook/window-size'
 import Markdown from './Markdown';
+import { useAnalytics } from '../lib/analytics/browser';
 
 enum BlockType {
   'ComponentSpecialSpecialVideoBlOck' = 'ComponentSpecialSpecialVideoBlOck',
@@ -141,19 +142,17 @@ export const BlockSpecialVideo: React.FC<{
     }
   }
 
+  const analytics = useAnalytics()
+
   useEffect(() => {
-    try {
-      if (playingVideo) {
-        // @ts-ignore
-        gtag('event', 'watchHomepageVideo', {
-          'event_category': 'website',
-          'event_label': 'Watched the campaign video'
-        });
-      }
-    } catch (e) {
-      console.error("Google analytics was not set up")
+    if (playingVideo) {
+      // @ts-ignore
+      analytics.trackEvent('watchHomepageVideo', {
+        category: 'website',
+        label: 'Watched the campaign video'
+      })
     }
-  }, [playingVideo])
+  }, [playingVideo, analytics])
 
   return (
     <Fragment>

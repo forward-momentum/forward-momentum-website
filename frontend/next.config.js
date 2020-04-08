@@ -12,5 +12,7 @@ module.exports = {
     SITE_HOST: process.env.SITE_HOST || "localhost",
     SITE_URL: process.env.SITE_URL,
     GOOGLE_ANALYTICS_ID: process.env.GOOGLE_ANALYTICS_ID,
+    POSTHOG_CLIENT_ID: process.env.POSTHOG_CLIENT_ID,
+    POSTHOG_URL: process.env.POSTHOG_URL,
   },
 };

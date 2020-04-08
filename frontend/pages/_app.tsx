@@ -2,6 +2,7 @@ import React from 'react'
 import App from 'next/app'
 import { ThemeProvider, Styled } from 'theme-ui'
 import theme from '../theme'
+import { AnalyticsProvider } from '../lib/analytics/browser';
 
 class MyApp extends App {
   // Only uncomment this method if you have blocking data requirements for
@@ -19,11 +20,13 @@ class MyApp extends App {
   render() {
     const { Component, pageProps } = this.props
     return (
-      <ThemeProvider theme={theme}>
-        <Styled.root>
-          <Component {...pageProps} />
-        </Styled.root>
-      </ThemeProvider>
+      <AnalyticsProvider>
+        <ThemeProvider theme={theme}>
+          <Styled.root>
+            <Component {...pageProps} />
+          </Styled.root>
+        </ThemeProvider>
+      </AnalyticsProvider>
     )
   }
 }
