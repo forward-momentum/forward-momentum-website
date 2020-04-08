@@ -25,7 +25,7 @@ export default {
     body:
       'IBM Plex Sans, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", sans-serif',
     mono: 'IBM Plex Mono, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", sans-serif',
-    heading: 'IBX Plex Sans, inherit',
+    heading: 'Chivo, IBX Plex Sans, inherit',
   },
   fontWeights: {
     body: 300,
@@ -33,12 +33,29 @@ export default {
     bold: 700,
   },
   text: {
+    Big: {
+      fontWeight: 700,
+      fontFamily: 'Chivo',
+      fontStyle: 'italic',
+      fontSize: ['2rem', '3rem']
+    },
+    Medium: {
+      fontFamily: 'Chivo',
+      fontWeight: 700,
+      // fontFamily: 'Chivo',
+      fontSize: ['1.5rem', '2rem']
+    },
+    Small: {
+      fontWeight: 400,
+      fontStyle: 'italic',
+      fontSize: ['1.3rem', '1.6rem']
+    },
     big: {
       fontSize: '1.7rem',
     },
     medium: {
       fontSize: '1.3rem'
-    }
+    },
   },
   buttons: {
     primary: {

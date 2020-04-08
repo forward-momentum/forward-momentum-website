@@ -13,18 +13,16 @@
     "content": {
       "type": "dynamiczone",
       "components": [
-        "atoms.signup-starter",
-        "page.link-boxes",
-        "page.link-box-item",
-        "atoms.document",
-        "atoms.big-heading",
-        "atoms.image",
+        "special.page-section-picker",
         "atoms.rich-text",
-        "atoms.learn-more-button",
-        "atoms.medium-heading",
-        "atoms.sign-up-form",
+        "atoms.heading",
+        "atoms.image",
         "atoms.html",
-        "page.blog-list"
+        "organisms.blog-list",
+        "organisms.signup-starter",
+        "organisms.learn-more-button",
+        "organisms.sign-up-form",
+        "special.special-video-bl-ock"
       ]
     },
     "title": {
@@ -39,6 +37,10 @@
     "slug": {
       "type": "uid",
       "targetField": "title"
+    },
+    "sections": {
+      "collection": "page-section",
+      "via": "pages"
     }
   }
 }

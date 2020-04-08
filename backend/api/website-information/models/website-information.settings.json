@@ -31,7 +31,7 @@
     "contacts": {
       "type": "component",
       "repeatable": true,
-      "component": "niche.contact"
+      "component": "special.contact"
     },
     "slug": {
       "type": "string"

@@ -10,20 +10,10 @@
     "timestamps": true
   },
   "attributes": {
-    "blocks": {
-      "type": "dynamiczone",
-      "components": [
-        "atoms.rich-text",
-        "atoms.learn-more-button",
-        "atoms.image",
-        "atoms.document",
-        "atoms.big-heading",
-        "page.link-boxes",
-        "atoms.html",
-        "page.blog-list",
-        "atoms.signup-starter",
-        "atoms.sign-up-form"
-      ]
+    "PagePicker": {
+      "type": "component",
+      "repeatable": false,
+      "component": "special.page-picker"
     }
   }
 }

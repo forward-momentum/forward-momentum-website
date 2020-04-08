@@ -1,0 +1,44 @@
+{
+  "connection": "default",
+  "collectionName": "components_organisms_learn_more_buttons",
+  "info": {
+    "name": "Learn More Button",
+    "icon": "location-arrow"
+  },
+  "options": {},
+  "attributes": {
+    "label": {
+      "type": "string",
+      "required": true,
+      "default": "Learn more"
+    },
+    "linkURL": {
+      "type": "string"
+    },
+    "page": {
+      "model": "page"
+    },
+    "textColor": {
+      "type": "enumeration",
+      "enum": [
+        "white",
+        "red",
+        "indigo",
+        "green"
+      ],
+      "required": true,
+      "default": "white"
+    },
+    "backgroundColor": {
+      "type": "enumeration",
+      "enum": [
+        "indigo",
+        "red",
+        "white",
+        "green"
+      ],
+      "required": true,
+      "default": "red"
+    }
+  }
+}

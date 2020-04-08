@@ -1,0 +1,20 @@
+{
+  "connection": "default",
+  "collectionName": "components_special_special_video_bl_ocks",
+  "info": {
+    "name": "SpecialVideoBLock",
+    "icon": "star"
+  },
+  "options": {},
+  "attributes": {
+    "backgroundImage": {
+      "model": "file",
+      "via": "related",
+      "plugin": "upload",
+      "required": false
+    },
+    "youtubeVideoID": {
+      "type": "string"
+    }
+  }
+}

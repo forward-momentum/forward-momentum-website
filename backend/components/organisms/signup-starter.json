@@ -1,0 +1,39 @@
+{
+  "connection": "default",
+  "collectionName": "components_organisms_signup_starters",
+  "info": {
+    "name": "SignupStarter",
+    "icon": "pen-fancy"
+  },
+  "options": {},
+  "attributes": {
+    "title": {
+      "type": "string",
+      "default": "Signup and get involved",
+      "required": false
+    },
+    "backgroundColor": {
+      "type": "enumeration",
+      "enum": [
+        "white",
+        "red",
+        "indigo",
+        "green"
+      ],
+      "required": true,
+      "default": "green"
+    },
+    "textColor": {
+      "type": "enumeration",
+      "enum": [
+        "black",
+        "white",
+        "indigo",
+        "red",
+        "green"
+      ],
+      "required": true,
+      "default": "white"
+    }
+  }
+}

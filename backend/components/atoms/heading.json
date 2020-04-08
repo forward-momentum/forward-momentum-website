@@ -1,0 +1,34 @@
+{
+  "connection": "default",
+  "collectionName": "components_atoms_headings",
+  "info": {
+    "name": "Heading",
+    "icon": "broadcast-tower"
+  },
+  "options": {},
+  "attributes": {
+    "text": {
+      "type": "string"
+    },
+    "Size": {
+      "type": "enumeration",
+      "enum": [
+        "Big",
+        "Medium",
+        "Small"
+      ]
+    },
+    "textColor": {
+      "type": "enumeration",
+      "enum": [
+        "dark",
+        "white",
+        "indigo",
+        "red",
+        "green"
+      ],
+      "required": true,
+      "default": "dark"
+    }
+  }
+}

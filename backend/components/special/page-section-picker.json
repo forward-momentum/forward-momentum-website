@@ -1,0 +1,14 @@
+{
+  "connection": "default",
+  "collectionName": "components_special_page_section_pickers",
+  "info": {
+    "name": "PageSectionPicker",
+    "icon": "boxes"
+  },
+  "options": {},
+  "attributes": {
+    "section": {
+      "model": "page-section"
+    }
+  }
+}

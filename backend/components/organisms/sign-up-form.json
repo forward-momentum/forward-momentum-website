@@ -1,0 +1,16 @@
+{
+  "connection": "default",
+  "collectionName": "components_organisms_sign_up_forms",
+  "info": {
+    "name": "SignUpForm",
+    "icon": "clipboard-list"
+  },
+  "options": {},
+  "attributes": {
+    "title": {
+      "type": "string",
+      "default": "Sign up and get involved",
+      "required": true
+    }
+  }
+}

@@ -1,0 +1,14 @@
+{
+  "connection": "default",
+  "collectionName": "components_special_page_pickers",
+  "info": {
+    "name": "PagePicker",
+    "icon": "compress-arrows-alt"
+  },
+  "options": {},
+  "attributes": {
+    "page": {
+      "model": "page"
+    }
+  }
+}

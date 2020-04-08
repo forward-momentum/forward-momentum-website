@@ -1,0 +1,76 @@
+{
+  "kind": "collectionType",
+  "connection": "default",
+  "collectionName": "page_sections",
+  "info": {
+    "name": "Page Section"
+  },
+  "options": {
+    "increments": true,
+    "timestamps": true
+  },
+  "attributes": {
+    "background": {
+      "type": "enumeration",
+      "enum": [
+        "white",
+        "red",
+        "indigo",
+        "green",
+        "image"
+      ],
+      "default": "white",
+      "required": true
+    },
+    "text": {
+      "type": "enumeration",
+      "enum": [
+        "dark",
+        "light"
+      ],
+      "default": "dark",
+      "private": false,
+      "required": true
+    },
+    "backgroundImage": {
+      "model": "file",
+      "via": "related",
+      "plugin": "upload",
+      "required": false
+    },
+    "content": {
+      "type": "dynamiczone",
+      "components": [
+        "atoms.rich-text",
+        "atoms.heading",
+        "atoms.image",
+        "atoms.html",
+        "organisms.blog-list",
+        "organisms.signup-starter",
+        "organisms.learn-more-button",
+        "organisms.sign-up-form"
+      ]
+    },
+    "pages": {
+      "via": "sections",
+      "collection": "page",
+      "dominant": true
+    },
+    "sectionName": {
+      "type": "string",
+      "required": true,
+      "private": true
+    },
+    "textAlign": {
+      "type": "enumeration",
+      "enum": [
+        "left",
+        "center",
+        "right",
+        "justify"
+      ],
+      "default": "left",
+      "required": true
+    }
+  }
+}

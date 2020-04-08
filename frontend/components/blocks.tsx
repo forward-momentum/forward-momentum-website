@@ -2,24 +2,32 @@
 import { jsx, Box, Text, Flex, Image, Input, Heading, Button, Styled } from 'theme-ui';
 import Link from 'next/link';
 import Markdown from 'react-markdown';
-import { Fragment } from 'react';
+import { Fragment, useState } from 'react';
 import { useQuery } from '@apollo/react-hooks';
 import graphql from 'graphql-tag';
-import slug from 'slug'
 import SignUp from './SignupForm';
 import { formatRelative } from 'date-fns'
 import { filePath } from '../data/file';
+// @ts-ignore
+import ArrowBtn from '../public/arrow.svg'
+// @ts-ignore
+import Logo from '../public/logo.svg';
+import YouTube from 'react-youtube';
+import {
+  useWindowHeight,
+} from '@react-hook/window-size'
 
 enum BlockType {
+  'ComponentSpecialSpecialVideoBlOck' = 'ComponentSpecialSpecialVideoBlOck',
+  'ComponentSpecialPageSectionPicker' = 'ComponentSpecialPageSectionPicker',
   'ComponentPageBlogList' = 'ComponentPageBlogList',
-  'ComponentAtomsSignupStarter' = 'ComponentAtomsSignupStarter',
-  'ComponentAtomsSignUpForm' = 'ComponentAtomsSignUpForm',
-  'ComponentPageLinkBoxes' = 'ComponentPageLinkBoxes',
-  'ComponentPageLinkBoxItem' = 'ComponentPageLinkBoxItem',
+  'ComponentOrganismsSignupStarter' = 'ComponentOrganismsSignupStarter',
+  'ComponentOrganismsSignUpForm' = 'ComponentOrganismsSignUpForm',
   'ComponentAtomsRichText' = 'ComponentAtomsRichText',
   'ComponentAtomsHtml' = 'ComponentAtomsHtml',
-  'ComponentAtomsLearnMoreButton' = 'ComponentAtomsLearnMoreButton',
+  'ComponentOrganismsLearnMoreButton' = 'ComponentOrganismsLearnMoreButton',
   'ComponentAtomsImage' = 'ComponentAtomsImage',
+  'ComponentAtomsHeading' = 'ComponentAtomsHeading',
   'ComponentAtomsDocument' = 'ComponentAtomsDocument',
 }
 
@@ -27,38 +35,53 @@ type Block = {
   __typename: BlockType
 }
 
+const PaddedWrapper = ({ children }) => (
+  <Box sx={{ py: [2, 3], variant: 'page.block' }}>
+    <Box sx={{ variant: 'page.width' }}>
+      {children}
+    </Box>
+  </Box>
+)
+
 export const BlockStream: React.FC<{
   blocks: Block[]
-}> = ({ blocks }) => {
+  wrap?: boolean
+}> = ({ blocks, wrap }) => {
+  const Wrapper = ({ children }) => wrap ? (
+    <PaddedWrapper>{children}</PaddedWrapper>
+  ) : (
+      <Fragment>{children}</Fragment>
+    )
+
   return (
-    <Fragment>
+    <Wrapper>
       {blocks?.map((block, i) => {
         if (block.__typename === 'ComponentPageBlogList') {
           return <BlockBlogList key={i} block={block} />
         }
 
-        if (block.__typename === 'ComponentPageLinkBoxes') {
-          return <BlockLinkBoxes key={i} block={block} />
-        }
-
-        if (block.__typename === 'ComponentPageLinkBoxItem') {
-          return <BlockLinkBox key={i} block={block} />
-
-        }
-
-        if (block.__typename === 'ComponentAtomsSignupStarter') {
+        if (block.__typename === 'ComponentOrganismsSignupStarter') {
           return (
             <Box sx={{
               variant: 'page.narrow',
-              maxWidth: 500
+              maxWidth: 550,
+              my: [4, 5]
             }}>
               <BlockSignupStarter block={block} />
             </Box>
           )
         }
 
-        if (block.__typename === 'ComponentAtomsSignUpForm') {
+        if (block.__typename === 'ComponentSpecialSpecialVideoBlOck') {
+          return <BlockSpecialVideo block={block} />
+        }
+
+        if (block.__typename === 'ComponentOrganismsSignUpForm') {
           return <BlockSignupForm block={block} />
+        }
+
+        if (block.__typename === 'ComponentAtomsHeading') {
+          return <BlockHeading key={i} block={block} />
         }
 
         if (block.__typename === 'ComponentAtomsRichText') {
@@ -69,7 +92,7 @@ export const BlockStream: React.FC<{
           return <BlockHTML key={i} block={block} />
         }
 
-        if (block.__typename === 'ComponentAtomsLearnMoreButton') {
+        if (block.__typename === 'ComponentOrganismsLearnMoreButton') {
           return <BlockLearnMoreButton key={i} block={block} />
         }
 
@@ -80,7 +103,104 @@ export const BlockStream: React.FC<{
         if (block.__typename === 'ComponentAtomsDocument') {
           return <BlockDocument key={i} block={block} />
         }
-      })}</Fragment>
+
+        if (block.__typename === 'ComponentSpecialPageSectionPicker') {
+          return <BlockPageSection key={i} block={block} />
+        }
+
+        if (process.env.NODE_ENV !== 'production') {
+          return <pre key={i}>{JSON.stringify(blocks, null, 2)}</pre>
+        }
+      })}</Wrapper>
+  )
+}
+
+export const BlockSpecialVideo: React.FC<{
+  block: any
+}> = ({ block: { youtubeVideoID, backgroundImage } }) => {
+  const [playingVideo, setPlayingVideo] = useState(false)
+  const screenHeight = useWindowHeight()
+
+  let sx: any = {}
+  if (!!backgroundImage) {
+    sx = {
+      backgroundImage: `url(${filePath(backgroundImage.url)})`,
+      backgroundPosition: 'center',
+      backgroundSize: 'cover'
+    }
+  }
+
+  return (
+    <Fragment>
+      <Box sx={{
+        bg: 'red',
+        color: 'white',
+        textAlign: 'center',
+        ...sx
+      }}>
+        {playingVideo ? (
+          <YouTube videoId={youtubeVideoID} opts={{
+            width: `100%`,
+            height: `${Math[screenHeight > 500 ? 'max' : 'min'](screenHeight, 500)}`
+          }} />
+        ) : (
+            <Box sx={{
+              p: [5, 6, 6, 7],
+            }}>
+              <Logo sx={{
+                width: '100%',
+                cursor: 'pointer',
+                '* path': {
+                  fill: 'white'
+                }
+              }} />
+              {youtubeVideoID && (
+                <Text
+                  onClick={() => void setPlayingVideo(true)}
+                  sx={{
+                    cursor: 'pointer',
+                    textTransform: 'uppercase',
+                    fontStyle: 'italic',
+                    fontSize: [2, 3],
+                    fontWeight: 700
+                  }}>
+                  Play video >>
+                </Text>
+              )}
+            </Box>
+          )}
+      </Box>
+    </Fragment>
+  )
+}
+
+export const BlockPageSection: React.FC<{
+  block: any
+}> = ({ block }) => {
+  const { content, background, backgroundImage, text, textAlign } = block.section
+  return (
+    <Box sx={{
+      color: text === 'light' ? 'white' : text !== 'dark' ? text : null,
+      [backgroundImage ? 'background' : 'bg']: backgroundImage ? `url(${filePath(backgroundImage?.url)})` : background,
+      backgroundSize: 'cover',
+      backgroundPosition: 'center',
+      textAlign,
+      py: [3, 4, 5]
+    }}>
+      <PaddedWrapper>
+        <BlockStream blocks={content} wrap={false} />
+      </PaddedWrapper>
+    </Box>
+  )
+}
+
+export const BlockHeading: React.FC<{
+  block: any
+}> = ({ block }) => {
+  return (
+    <Heading variant={block.Size} sx={{ color: block.color }}>
+      {block.text}
+    </Heading>
   )
 }
 
@@ -104,23 +224,54 @@ export const BlockRichText: React.FC<{
 
 export const BlockLearnMoreButton: React.FC<{
   block: any
-}> = ({ block }) => {
-  return (
-    <Box>
-      <Link href={block.linkUrl || "/"}>
-        <Flex sx={{
-          cursor: 'pointer', bg: 'white', py: [2, 3], px: [3, 5], border: '3px solid', borderColor: 'indigo', borderRadius: 8,
-          justifyContent: 'space-between',
-          color: 'secondary',
-          fontSize: 3
-        }}>
-          <div>{block.label}</div>
-          <div>⏩</div>
-        </Flex>
-      </Link>
-    </Box>
-  )
-}
+}> = ({ block: {
+  label,
+  linkURL,
+  page,
+  textColor,
+  backgroundColor,
+} }) => {
+    return (
+      <Box>
+        <Link href={page?.slug || linkURL || "/"}>
+          <Flex sx={{
+            cursor: 'pointer',
+            justifyContent: 'center',
+            alignContent: 'center',
+            fontSize: 3,
+            verticalAlign: 'middle',
+          }}>
+            <Box sx={{
+              backgroundColor,
+              color: textColor,
+              mr: 2,
+              fontWeight: 700,
+              fontStyle: 'italic',
+              px: [2, 3],
+              py: [1, 2],
+              verticalAlign: 'middle'
+            }}>
+              {label}
+            </Box>
+            <Box sx={{
+              backgroundColor,
+              width: '2.5em',
+              px: [1],
+              verticalAlign: 'middle'
+            }}>
+              <ArrowBtn sx={{
+                width: '100%',
+                cursor: 'pointer',
+                '*, * path': {
+                  fill: `${textColor} !important`
+                }
+              }} />
+            </Box>
+          </Flex>
+        </Link>
+      </Box>
+    )
+  }
 export const BlockImage: React.FC<{
   block: any
 }> = ({ block }) => {
@@ -163,42 +314,73 @@ const useRegisteredSupportersCount = (): (undefined | number) => {
 
 export const BlockSignupStarter: React.FC<{
   block: any
-}> = ({ block }) => {
+}> = ({ block: { bg, textcolor, description } }) => {
   const registeredSupportersCount = useRegisteredSupportersCount()
   return (
     <Box sx={{
       textAlign: 'center',
-      bg: 'paleRed',
-      color: 'white',
+      bg,
+      color: textcolor,
       p: 3,
-      borderRadius: 5,
-      mb: 35
     }}>
-      <Text sx={{ fontSize: [3, 4], p: 2 }}>{block.title}</Text>
+      <Heading sx={{
+        fontWeight: 700,
+        fontStyle: 'italic'
+      }}>{description}</Heading>
+      <form method='GET' action='/signup'>
+        <Flex sx={{
+          cursor: 'pointer',
+          justifyContent: 'center',
+          alignContent: 'center',
+          fontSize: 3,
+          verticalAlign: 'middle',
+          my: 3,
+        }}>
+          <Input
+            name='email'
+            type='email'
+            placeholder='Enter your email address'
+            sx={{
+              // textAlign: 'center',
+              mr: 2,
+              // fontWeight: 700,
+              // fontStyle: 'italic',
+              px: [2, 3],
+              py: [1, 2],
+              verticalAlign: 'middle',
+              border: '3px solid',
+              borderColor: textcolor,
+              bg: 'white',
+              color: 'black',
+              fontSize: [3, 4],
+              borderRadius: 0
+            }}
+          />
+          <Button type='submit' sx={{
+            // backgroundColor,
+            width: '3em',
+            px: [2],
+            py: [0],
+            verticalAlign: 'middle',
+            border: '1px solid white',
+            bg: 'transparent',
+            borderRadius: '0'
+          }}>
+            <ArrowBtn sx={{
+              width: '100%',
+              cursor: 'pointer',
+              '*, * path': {
+                fill: `white !important`
+              }
+            }} />
+          </Button>
+        </Flex>
+      </form>
       {!!registeredSupportersCount && (
-        <Text sx={{ fontSize: [2, 3], pb: 2, opacity: 0.7, textAlign: 'center' }}>
+        <Text sx={{ fontSize: [2, 3], pb: 2, textAlign: 'center' }}>
           <u>{registeredSupportersCount}</u> / 2500 registered supporters goal
         </Text>
       )}
-      <form method='GET' action='/signup'>
-        <Input
-          name='email'
-          type='email'
-          placeholder='Enter your email address'
-          sx={{
-            textAlign: 'center',
-            border: '3px solid',
-            borderColor: 'indigo',
-            color: 'black',
-            bg: 'white',
-            mt: 2,
-            mb: -50,
-            boxShadow: 'box',
-            fontSize: [3, 4],
-            p: 3
-          }}
-        />
-      </form>
     </Box>
   )
 }
@@ -212,62 +394,6 @@ export const BlockSignupForm: React.FC<{
       <SignUp />
     )
   }
-
-export const BlockLinkBoxes: React.FC<{
-  block: any
-}> = ({ block }) => {
-  return (
-    <Flex sx={{
-      flexGrow: 1,
-      flexBasis: 0,
-      flexDirection: ['column', 'column', 'row'],
-      justifyContent: 'start',
-      alignContent: 'start',
-      '.linkBox': {
-        ':nth-child(1)': { bg: 'indigo' },
-        ':nth-child(2)': { bg: 'yellow' },
-        ':nth-child(3)': { bg: 'green' }
-      }
-    }}>
-      {block?.LinkBoxItem.map(c => {
-        return <BlockLinkBox block={c} />
-      })}
-    </Flex>
-  )
-}
-
-export const BlockLinkBox: React.FC<{
-  block: any
-}> = ({ block }) => {
-  const signupFormInReferencedPage = block.page?.content.find(pageBlock => pageBlock.__typename === BlockType.ComponentAtomsSignUpForm)
-
-  return (
-    <Box sx={{
-      variant: 'hoverable',
-      mx: [0, 3],
-      my: 3,
-      width: '100%'
-    }}>
-      {!!signupFormInReferencedPage ? (
-        <BlockSignupStarter block={{ title: signupFormInReferencedPage.title }} />
-      ) : (
-          <Link href={block.alternativeURL || slug(block.page.slug)}>
-            <Box className='linkBox' sx={{
-              color: 'white',
-              textAlign: 'center',
-              cursor: 'pointer',
-              borderRadius: 5,
-              p: 3,
-              boxShadow: 'box'
-            }}>
-              <Heading>{block.heading}</Heading>
-              <Text>{block.summaryText}</Text>
-            </Box>
-          </Link>
-        )}
-    </Box>
-  )
-}
 
 const QUERY_BLOG_PAGES = graphql`
   query RegisteredSupportersCount {

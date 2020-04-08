@@ -25,26 +25,7 @@ const Header = () => {
   const [colorMode, setColorMode] = useColorMode()
   return (
     <Fragment>
-      <Box sx={{ textAlign: 'center', pt: [4, 5, 6], pb: [2, 4, 5], px: [4, 4], variant: 'page.block' }}>
-        <Box sx={{ variant: 'page.width' }}>
-          <Box className='logo' sx={{ maxWidth: ['100%', 400], display: 'inline-block' }}>
-            <Link href='/'>
-              <Logo sx={{
-                width: '100%',
-                cursor: 'pointer',
-                '* path': {
-                  fill: 'red'
-                }
-              }} />
-            </Link>
-          </Box>
-        </Box>
-      </Box>
-      <Button
-        sx={{ px: [1, 2, 3], py: [1, 2], position: 'fixed', top: 10, right: 10, fontSize: 0, border: '1px solid', borderColor: 'text', color: 'text', background: 'none' }}
-        onClick={() => setColorMode(colorMode === 'light' ? 'dark' : 'light')}>
-        {colorMode === 'light' ? 'Dark' : 'Light'}
-      </Button>
+      {/* TODO: Navigation */}
     </Fragment>
   )
 }

@@ -1,0 +1,10 @@
+{
+  "connection": "default",
+  "collectionName": "components_page_page_sections",
+  "info": {
+    "name": "PageSection",
+    "icon": "columns"
+  },
+  "options": {},
+  "attributes": {}
+}
