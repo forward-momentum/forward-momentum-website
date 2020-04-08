@@ -27,6 +27,16 @@ const SignUp = () => {
 
   const onSubmit = async (data: Fields) => {
     try {
+      // @ts-ignore
+      gtag('event', 'signup', {
+        'event_category': 'campaign',
+        'event_label': 'Visitor signed up'
+      });
+    } catch (e) {
+      console.error("Google analytics was not set up")
+    }
+
+    try {
       schema.validate(data)
       if (schema.isValid(data)) {
         const res = await registerSupporter(data)
