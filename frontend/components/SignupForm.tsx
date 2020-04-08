@@ -29,6 +29,9 @@ export const schema = yup.object({
   phone: yup
     .string()
     .label("Phone number"),
+  townCity: yup
+    .string()
+    .label("Town or city"),
   region: yup
     .string()
     .oneOf([
@@ -49,10 +52,13 @@ export const schema = yup.object({
     .required(),
   isSupporter: yup
     .boolean()
-    .label("Do you support this campaign?"),
+    .label("Do you support the goals of this campaign?"),
   hasVolunteered: yup
     .boolean()
     .label("Do you want to get involved?"),
+  momentumMember: yup
+    .boolean()
+    .label("Are you a Momentum member?"),
   consentToEmail: yup
     .boolean()
     .label("Consent to emails"),
@@ -115,13 +121,19 @@ const SignUp = () => {
         <Label>{(schema.fields.isSupporter as any)._label}</Label>
         <Label variant='forms.checkboxOption' sx={{ lineHeight: '2em' }}>
           <IN sx={{ variant: 'checkbox' }} name='isSupporter' type="checkbox" ref={register} />
-            Yes, I support the campaign
+            Yes, I do
           </Label>
 
         <Label>{(schema.fields.hasVolunteered as any)._label}</Label>
         <Label variant='forms.checkboxOption' sx={{ lineHeight: '2em' }}>
           <IN type='checkbox' sx={{ variant: 'checkbox' }} name={'hasVolunteered'} ref={register} />
             Yes, let me know how
+          </Label>
+
+        <Label>{(schema.fields.momentumMember as any)._label}</Label>
+        <Label variant='forms.checkboxOption' sx={{ lineHeight: '2em' }}>
+          <IN type='checkbox' sx={{ variant: 'checkbox' }} name={'momentumMember'} ref={register} />
+            Yes, I am
           </Label>
 
         <TextInput
@@ -167,6 +179,13 @@ const SignUp = () => {
           }
         />
         {errors.region && <div style={fieldErrorStyle}>{errors.region.message}</div>}
+
+        <TextInput
+          name='townCity'
+          schema={schema}
+          errors={errors}
+          register={register}
+        />
 
         <Label variant='forms.checkboxOption' sx={{ mt: 4 }}>
           <IN sx={{ variant: 'checkbox' }} type='checkbox' name='consentToDataPolicy' ref={register} />

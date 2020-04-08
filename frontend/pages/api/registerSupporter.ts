@@ -39,11 +39,13 @@ export default async (req, res) => {
 // Translators to different third party systems
 
 const translateFormToAirtableFields = (data: SchemaObject) => {
-  const { region, isSupporter, ...d } = data
+  const { region, momentumMember, isSupporter, townCity, ...d } = data
 
   return {
     ...d,
     regionFromWebsite: region,
+    ['Specific location']: townCity,
+    ['Relationship to momentum']: momentumMember ? ['Member'] : undefined,
     ['On board with project']: (isSupporter ? 3 : 1).toString(),
     dataSource: "Signed up via https://fwdmomentum.org"
   }
@@ -54,7 +56,7 @@ export const translateFromToActionNetworkFields = ({
   lastName,
   email,
   ...person
-}: SchemaObject): (any | ActionNetworkPersonArgs) => {
+}: SchemaObject): ActionNetworkPersonArgs => {
   const tags = []
 
   if (person.isSupporter) {
@@ -67,6 +69,10 @@ export const translateFromToActionNetworkFields = ({
     tags.push('Volunteer')
   }
 
+  if (person.momentumMember) {
+    tags.push('Momentum member')
+  }
+
   return {
     person: {
       "identifiers": [
@@ -76,17 +82,10 @@ export const translateFromToActionNetworkFields = ({
       "family_name": lastName,
       "postal_addresses": [{
         "primary": true,
-        "locality": person.region,
+        "locality": person.townCity,
         "region": person.region,
         "country": "GB"
       }],
-      "mobile_numbers": person.phone ? [
-        {
-          "primary": true,
-          "number": person.phone,
-          "status": person.consentToPhone ? "subscribed" : "unsubscribed"
-        }
-      ] : [],
       "email_addresses": [{
         "primary": true,
         "address": email,
