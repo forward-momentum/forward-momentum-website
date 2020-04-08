@@ -1,4 +1,4 @@
-import { SchemaObject } from '../components/SignupForm';
+import { SchemaObject } from './fwdmomentum';
 
 export const registerSupporter = async (data: SchemaObject) => {
   return await fetch('/api/registerSupporter', {

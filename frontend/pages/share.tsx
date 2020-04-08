@@ -4,7 +4,7 @@ import { withApollo } from '../lib/apollo';
 import Layout, { Spacer } from '../components/Layout';
 import { useRouter } from 'next/router';
 import { SocialShareLinks } from '../components/Layout';
-import { schema } from '../components/SignupForm';
+import { schema } from '../data/fwdmomentum';
 
 const SignUp = () => {
   const router = useRouter()

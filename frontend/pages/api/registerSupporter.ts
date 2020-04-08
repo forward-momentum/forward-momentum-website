@@ -1,6 +1,6 @@
-import { SchemaObject, schema } from '../../components/SignupForm';
 import table, { createRecords } from '../../lib/airtable';
 import { createActionNetworkContact, ActionNetworkPersonArgs } from '../../lib/actionnetwork';
+import { schema, SchemaObject } from '../../data/fwdmomentum';
 
 export default async (req, res) => {
   res.setHeader('Content-Type', 'application/json')
