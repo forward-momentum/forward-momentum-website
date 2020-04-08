@@ -1,6 +1,6 @@
 /** @jsx jsx */
 import { jsx, Box, Button, useColorMode, Styled, Text, Flex } from 'theme-ui';
-import { Fragment, useState } from 'react';
+import { Fragment, useState, forwardRef } from 'react';
 import SEO from './SEO';
 import Contacts from './Contacts';
 // @ts-ignore
@@ -13,12 +13,15 @@ import { twitterShareUrl, emailShareUrl, facebookShareUrl, whatsAppShareUrl } fr
 import graphql from 'graphql-tag';
 import { useQuery } from '@apollo/react-hooks';
 import { ContentWrapper } from './elements';
+import Fixed from './Fixed';
 
 export default ({ children }) => {
   return (
     <Fragment>
       <SEO />
-      <Header />
+      <Fixed>{ref =>
+        <Header ref={ref} />
+      }</Fixed>
       {children}
       <Box sx={{ height: ['2em', '3em', '4em'] }} />
       <Footer />
@@ -45,14 +48,14 @@ const useNavLinks = () => {
   return data?.navigation?.navlink
 }
 
-const Header = () => {
+const Header = forwardRef((props, ref) => {
   const links = useNavLinks()
   const [navOpened, setNavOpened] = useState(false)
   const toggleNav = () => setNavOpened(o => !o)
 
   return (
     <Fragment>
-      <Box sx={{
+      <Box ref={ref} sx={{
         p: [2, 3],
         position: 'fixed', top: 0, left: 0, width: '100%',
         bg: 'red', color: 'white'
@@ -99,7 +102,7 @@ const Header = () => {
       )}
     </Fragment>
   )
-}
+})
 
 const Footer = () => {
   return (
