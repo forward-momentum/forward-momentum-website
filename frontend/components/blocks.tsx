@@ -1,7 +1,7 @@
 /** @jsx jsx */
 import { jsx, Box, Text, Flex, Image, Input, Heading, Button, Styled } from 'theme-ui';
 import Link from 'next/link';
-import { Fragment, useState } from 'react';
+import { Fragment, useState, useEffect } from 'react';
 import { useQuery } from '@apollo/react-hooks';
 import graphql from 'graphql-tag';
 import SignUp from './SignupForm';
@@ -140,6 +140,20 @@ export const BlockSpecialVideo: React.FC<{
       backgroundSize: 'cover'
     }
   }
+
+  useEffect(() => {
+    try {
+      if (playingVideo) {
+        // @ts-ignore
+        gtag('event', 'watchHomepageVideo', {
+          'event_category': 'website',
+          'event_label': 'Watched the campaign video'
+        });
+      }
+    } catch (e) {
+      console.error("Google analytics was not set up")
+    }
+  }, [playingVideo])
 
   return (
     <Fragment>

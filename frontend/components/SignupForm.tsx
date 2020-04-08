@@ -28,9 +28,10 @@ const SignUp = () => {
   const onSubmit = async (data: Fields) => {
     try {
       // @ts-ignore
-      gtag('event', 'signup', {
+      gtag('event', 'attemptedSignup', {
         'event_category': 'campaign',
-        'event_label': 'Visitor signed up'
+        'event_label': 'Clicked the sign-up send button',
+        'event_value': 'webform'
       });
     } catch (e) {
       console.error("Google analytics was not set up")
@@ -39,6 +40,17 @@ const SignUp = () => {
     try {
       schema.validate(data)
       if (schema.isValid(data)) {
+        try {
+          // @ts-ignore
+          gtag('event', 'validSignup', {
+            'event_category': 'campaign',
+            'event_label': 'Submitted valid signup data',
+            'event_value': 'webform'
+          });
+        } catch (e) {
+          console.error("Google analytics was not set up")
+        }
+
         const res = await registerSupporter(data)
         if (!res.ok) throw new Error("Not OK response from server")
         const d = await res.json()
@@ -53,6 +65,12 @@ const SignUp = () => {
   useEffect(() => {
     if (formState.isSubmitted && successfullySubmitted) {
       const { firstName, consentToEmail, consentToMessaging, consentToPhone } = d
+      // @ts-ignore
+      gtag('event', 'successfulSignup', {
+        'event_category': 'campaign',
+        'event_label': 'Signup was successful',
+        'event_value': 'webform'
+      });
       router.push({
         pathname: '/share',
         query: { firstName, consentToEmail, consentToMessaging, consentToPhone }
