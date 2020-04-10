@@ -9,7 +9,7 @@ import Layout from '../../components/Layout';
 import { formatRelative } from 'date-fns';
 import { filePath } from '../../data/file';
 import Head from 'next/head';
-import Markdown from '../../components/Markdown';
+import Markdown from 'react-markdown';
 
 const BLOG_PAGE = graphql`
   query BlogPage($slug: String!) {
@@ -89,7 +89,10 @@ const Page = () => {
           )}
           <Text variant='big'>{description}</Text>
           <Text variant='medium'>
-            <Markdown source={text} />
+            <Markdown
+              source={text}
+              escapeHtml={false}
+            />
           </Text>
         </Box>
       </Box>

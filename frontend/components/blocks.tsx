@@ -1,7 +1,7 @@
 /** @jsx jsx */
 import { jsx, Box, Text, Flex, Image, Input, Heading, Button, Styled } from 'theme-ui';
 import Link from 'next/link';
-import { Fragment, useState, useEffect } from 'react';
+import { Fragment, useState, useEffect, useMemo } from 'react';
 import { useQuery } from '@apollo/react-hooks';
 import graphql from 'graphql-tag';
 import SignUp from './SignupForm';
@@ -15,8 +15,9 @@ import YouTube from 'react-youtube';
 import {
   useWindowHeight,
 } from '@react-hook/window-size'
-import Markdown from './Markdown';
 import { useAnalytics } from '../lib/analytics/browser';
+import { textToSlug, useMarkdownTree, markdownTreeToHeadingWithAnchor, nodeToText, useMarkdownActiveNodeIndex } from './Markdown';
+import Markdown from 'react-markdown';
 
 enum BlockType {
   'ComponentSpecialSpecialVideoBlOck' = 'ComponentSpecialSpecialVideoBlOck',
@@ -89,7 +90,11 @@ export const BlockStream: React.FC<{
         } else if (
           block.__typename === 'ComponentAtomsRichText'
         ) {
-          ch = <BlockRichText key={i} block={block} />
+          if ((block as any).tableOfContents) {
+            ch = <BlockRichTextWithTOC key={i} block={block} />
+          } else {
+            ch = <BlockRichText key={i} block={block} />
+          }
         } else if (
           block.__typename === 'ComponentAtomsHtml'
         ) {
@@ -118,6 +123,7 @@ export const BlockStream: React.FC<{
 
         if (
           wrap && !['ComponentSpecialPageSectionPicker', 'ComponentSpecialSpecialVideoBlOck'].includes(block.__typename)
+          && !(block as any).tableOfContents
         ) {
           return <Wrapper key={i}>{ch}</Wrapper>
         } else {
@@ -202,6 +208,7 @@ export const BlockPageSection: React.FC<{
   block: any
 }> = ({ block }) => {
   const { content, background, backgroundImage, text, textAlign } = block.section
+
   return (
     <Box sx={{
       color: text === 'light' ? 'white' : text !== 'dark' ? text : null,
@@ -241,8 +248,93 @@ export const BlockRichText: React.FC<{
 }> = ({ block }) => {
   return (
     <Text variant='medium'>
-      <Markdown source={block.value} />
+      <Markdown
+        source={block.value}
+        escapeHtml={false}
+        renderers={{ heading: markdownTreeToHeadingWithAnchor }}
+      />
     </Text>
+  )
+}
+
+export const BlockRichTextWithTOC: React.FC<{
+  block: any
+}> = ({ block }) => {
+  const [documentTree, captureDocumentNodesAstPlugin] = useMarkdownTree()
+
+  const docTree = useMemo(() => {
+    return documentTree.map((node, index) => {
+      if (node.type !== 'heading') {
+        return { ...node, index, text: undefined, slug: undefined }
+      }
+      const text = nodeToText(node)
+      const slug = textToSlug(text)
+      return { ...node, index, text, slug }
+    })
+  }, [documentTree])
+
+  const filterNodes = node => node.type === 'heading' && node.depth <= 3
+
+  const activeHeadingIndex = useMarkdownActiveNodeIndex(docTree, filterNodes)
+
+  const column = {
+    flexShrink: 0, flexGrow: 1,
+    width: '20%',
+    minWidth: 100,
+    maxWidth: 300
+  }
+
+  return (
+    <Flex sx={{ flexDirection: 'row', position: 'relative', flexShrink: 0, flexGrow: 1 }}>
+      <Box sx={{
+        ...column,
+        display: ['none', 'none', 'flex'],
+        position: 'sticky',
+        overflowY: 'auto',
+        height: ['2em', '100%'],
+        left: 0,
+        top: 90,
+        flexDirection: 'column',
+        justifyContent: 'center',
+        alignContent: 'center',
+        pl: [3, 4],
+        pr: [null, null, 4]
+      }}>
+        {docTree
+          .filter(filterNodes)
+          .map((node, i) => {
+            const isActive = node.index === activeHeadingIndex
+
+            return (
+              <Link key={i} href={`#${node.slug}`}>
+                <Text sx={{
+                  transition: 'all 0.2s ease',
+                  color: isActive ? 'green' : 'grey',
+                  fontWeight: (node.depth <= 2 || isActive) && 700,
+                  fontSize: 3 - node.depth,
+                  my: 1,
+                  ml: node.depth,
+                  overflow: 'hidden',
+                  textOverflow: 'ellipsis',
+                  whiteSpace: 'nowrap',
+                  cursor: 'pointer'
+                }}>{node.text}</Text>
+              </Link>
+            )
+          })}
+      </Box>
+      <Box sx={{ width: '100%', variant: ['page.block', 'page.block', 'page.width'], pr: [null, null, 4, 0] }}>
+        <Text variant='medium'>
+          <Markdown
+            source={block.value}
+            escapeHtml={false}
+            astPlugins={[captureDocumentNodesAstPlugin]}
+            renderers={{ heading: markdownTreeToHeadingWithAnchor }}
+          />
+        </Text>
+      </Box>
+      <Box sx={{ ...column, display: ['none', 'none', 'none', 'flex'] }} />
+    </Flex>
   )
 }
 

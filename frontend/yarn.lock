@@ -4926,6 +4926,11 @@ react-use-dimensions@^1.2.1:
   resolved "https://registry.yarnpkg.com/react-use-dimensions/-/react-use-dimensions-1.2.1.tgz#eb1561db7b06c393209d2bffa449931dd93f7870"
   integrity sha512-XL+Rup9Hosxx3Ap9xpyQMbVwuUa4BSqiOjfBb2zDuGs4uv2FesFV+m8Z/huRx2BNptMd9ARPqFuSNA62zhCozg==
 
+react-use-gesture@^7.0.12:
+  version "7.0.12"
+  resolved "https://registry.yarnpkg.com/react-use-gesture/-/react-use-gesture-7.0.12.tgz#cf051b20a496011950ea144ebabcfbf9af2433f3"
+  integrity sha512-mkxaOA0gh10qy9Ha9ZpfhhPGBNJnlOG740oq0ukll0dE2NrBGR6ebzVrotJ4U5pAzjRKyTrpnzb7sdhm2PGdIg==
+
 react-youtube@^7.11.1:
   version "7.11.1"
   resolved "https://registry.yarnpkg.com/react-youtube/-/react-youtube-7.11.1.tgz#d380a1f5137aca8190eca5c4b2813278434057b9"

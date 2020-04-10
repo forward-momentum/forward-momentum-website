@@ -9,6 +9,11 @@
   "attributes": {
     "value": {
       "type": "richtext"
+    },
+    "tableOfContents": {
+      "type": "boolean",
+      "default": false,
+      "required": false
     }
   }
 }

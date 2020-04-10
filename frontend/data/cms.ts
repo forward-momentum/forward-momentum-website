@@ -18,6 +18,7 @@ export const PageFragment = graphql`
       }
       ... on ComponentAtomsRichText {
         value
+        tableOfContents
       }
       ... on ComponentOrganismsLearnMoreButton {
         ...LearnMore
@@ -62,6 +63,7 @@ export const PageFragment = graphql`
             }
             ... on ComponentAtomsRichText {
               value
+              tableOfContents
             }
             ... on ComponentOrganismsLearnMoreButton {
               ...LearnMore

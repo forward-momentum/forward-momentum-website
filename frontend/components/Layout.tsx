@@ -58,7 +58,8 @@ const Header = forwardRef((props, ref) => {
       <Box ref={ref} sx={{
         p: [2, 3],
         position: 'fixed', top: 0, left: 0, width: '100%',
-        bg: 'red', color: 'white'
+        bg: 'red', color: 'white',
+        zIndex: 999
       }}>
         <ContentWrapper sx={{ width: '100%' }}>
           <Flex sx={{ justifyContent: 'space-between' }}>
@@ -87,7 +88,8 @@ const Header = forwardRef((props, ref) => {
       {navOpened && (
         <Box sx={{
           bg: 'red', color: 'white', position: 'fixed', top: 0, left: 0, width: '100%', height: '100%', overflowY: 'scroll',
-          fontSize: [3, 4], textAlign: 'center', p: [3, 5, 7]
+          fontSize: [3, 4], textAlign: 'center', p: [3, 5, 7],
+          zIndex: 900
         }}>
           <Box onClick={toggleNav} sx={{ borderBottom: '1px solid white', cursor: 'pointer' }}>&larr; Back</Box>
           {links.map((l, i) => {
