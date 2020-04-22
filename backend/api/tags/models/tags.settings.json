@@ -1,0 +1,31 @@
+{
+  "kind": "collectionType",
+  "connection": "default",
+  "collectionName": "tags",
+  "info": {
+    "name": "Tags"
+  },
+  "options": {
+    "increments": true,
+    "timestamps": true
+  },
+  "attributes": {
+    "slug": {
+      "type": "uid",
+      "required": true,
+      "targetField": "name"
+    },
+    "name": {
+      "type": "string",
+      "unique": true
+    },
+    "blogs": {
+      "collection": "blog",
+      "via": "tags"
+    },
+    "pages": {
+      "collection": "page",
+      "via": "tags"
+    }
+  }
+}

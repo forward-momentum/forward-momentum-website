@@ -28,6 +28,11 @@
     "slug": {
       "type": "uid",
       "targetField": "title"
+    },
+    "tags": {
+      "via": "blogs",
+      "collection": "tags",
+      "dominant": true
     }
   }
 }

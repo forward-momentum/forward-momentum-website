@@ -512,8 +512,8 @@ export const BlockSignupForm: React.FC<{
   }
 
 const QUERY_BLOG_PAGES = graphql`
-  query RegisteredSupportersCount {
-    blogs {
+  query BlogsQuery($onlyIncludeBlogTags: [String!]) {
+    blogs(where: { tags_in: $onlyIncludeBlogTags }) {
       id
       slug
       title
@@ -521,13 +521,20 @@ const QUERY_BLOG_PAGES = graphql`
       created_at
       image {
         url
-      }   
+      }
+      tags {
+        id
+      }
     }
   }
 `;
 
-const useBlogList = () => {
-  const { data, error, loading } = useQuery(QUERY_BLOG_PAGES);
+const useBlogList = ({ onlyIncludeBlogTags }: {
+  onlyIncludeBlogTags?: string[]
+} = { onlyIncludeBlogTags: undefined }) => {
+  const { data, error, loading } = useQuery(QUERY_BLOG_PAGES, {
+    variables: { onlyIncludeBlogTags }
+  });
   if (!data) return
   return data.blogs
 }
@@ -535,12 +542,15 @@ const useBlogList = () => {
 export const BlockBlogList: React.FC<{
   block: any
 }> = ({ block }) => {
-  const articles = useBlogList()
+  const articles = useBlogList(block.onlyIncludeBlogTags)
   return (
     <Fragment>
-      {articles?.map((a) => (
-        <BlogPreview key={a.id} article={a} />
-      ))}
+      {articles
+        ?.sort((first, last) => new Date(last.created_at).getTime() - new Date(first.created_at).getTime())
+        .slice(0, block.maxNumberOfPosts || 20)
+        .map((a) => (
+          <BlogPreview key={a.id} article={a} />
+        ))}
     </Fragment>
   )
 }
