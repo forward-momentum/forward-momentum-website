@@ -5,7 +5,7 @@ import { Fragment, useState, useEffect, useMemo } from 'react';
 import { useQuery } from '@apollo/react-hooks';
 import graphql from 'graphql-tag';
 import SignUp from './SignupForm';
-import { formatRelative } from 'date-fns'
+import { format } from 'date-fns'
 import { filePath } from '../data/file';
 // @ts-ignore
 import ArrowBtn from '../public/arrow.svg'
@@ -572,32 +572,33 @@ export const BlogPreview: React.FC<{
     return (
       <Link {...link}>
         <Flex sx={{
-          flexDirection: ['column', 'row'],
-          justifyContent: 'start',
+          flexDirection: ['column-reverse', 'row'],
+          justifyContent: 'space-between',
           alignContent: 'start',
+          alignitems: 'stretch',
           cursor: 'pointer',
-          variant: 'hoverable'
+          borderRadius: [0, 5],
+          bg: 'rgba(255,255,255,0)',
+          transition: 'all 0.2s ease',
+          mx: -3,
+          my: [0, 1, 2],
+          border: '1px solid rgba(230,230,230,0.5)',
+          borderWidth: [0, 1],
+          ':hover': {
+            bg: 'rgba(230,230,230,0.3)'
+          }
         }}>
-          {image && (
-            <Box sx={{
-              borderRadius: 5,
-              boxShadow: 'box',
-              width: ['100%', '20%'],
-              height: [166, 150],
-              backgroundImage: `url(${filePath(image.url)})`,
-              backgroundPosition: 'center',
-              backgroundSize: 'cover',
-              mb: [3, 4],
-              mr: [0, 3]
-            }} />
-          )}
-          <Box>
+          <Box sx={{
+            p: 3,
+            pt: [2, null],
+            pr: 0
+          }}>
             <Box sx={{
               textAlign: 'left',
               opacity: 0.5,
               my: 1,
             }}>
-              {formatRelative(new Date(created_at), new Date())}
+              {format(new Date(created_at), 'EEEE, do LLLL')}
             </Box>
             <Heading sx={{
               variant: 'h3',
@@ -612,6 +613,20 @@ export const BlogPreview: React.FC<{
               <Styled.a>Read on &rarr;</Styled.a>
             </Link>
           </Box>
+          {image && (
+            <Box sx={{
+              borderRadius: [null, '0px 5px 5px 0px'],
+              // boxShadow: 'box',
+              width: ['100%', '25%', '35%'],
+              height: [166, null],
+              backgroundImage: `url(${filePath(image.url)})`,
+              backgroundPosition: 'center',
+              backgroundSize: 'cover',
+              flexGrow: 0,
+              flexShrink: 0,
+              ml: [0, 3, 4]
+            }} />
+          )}
         </Flex>
       </Link>
     )
