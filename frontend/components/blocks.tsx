@@ -22,7 +22,7 @@ import Markdown from 'react-markdown';
 enum BlockType {
   'ComponentSpecialSpecialVideoBlOck' = 'ComponentSpecialSpecialVideoBlOck',
   'ComponentSpecialPageSectionPicker' = 'ComponentSpecialPageSectionPicker',
-  'ComponentPageBlogList' = 'ComponentPageBlogList',
+  'ComponentOrganismsBlogList' = 'ComponentOrganismsBlogList',
   'ComponentOrganismsSignupStarter' = 'ComponentOrganismsSignupStarter',
   'ComponentOrganismsSignUpForm' = 'ComponentOrganismsSignUpForm',
   'ComponentAtomsRichText' = 'ComponentAtomsRichText',
@@ -60,7 +60,7 @@ export const BlockStream: React.FC<{
       {blocks?.map((block, i) => {
         let ch
         if (
-          block.__typename === 'ComponentPageBlogList'
+          block.__typename === 'ComponentOrganismsBlogList'
         ) {
           ch = <BlockBlogList key={i} block={block} />
         } else if (
