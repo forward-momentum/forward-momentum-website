@@ -542,7 +542,7 @@ const useBlogList = ({ onlyIncludeBlogTags }: {
 export const BlockBlogList: React.FC<{
   block: any
 }> = ({ block }) => {
-  const articles = useBlogList(block.onlyIncludeBlogTags)
+  const articles = useBlogList({ onlyIncludeBlogTags: block.onlyIncludeBlogTags.map(({ id }) => id) })
   return (
     <Fragment>
       {articles
