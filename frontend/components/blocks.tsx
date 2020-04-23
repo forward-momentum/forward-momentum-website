@@ -529,12 +529,8 @@ const QUERY_BLOG_PAGES = graphql`
   }
 `;
 
-const useBlogList = ({ onlyIncludeBlogTags }: {
-  onlyIncludeBlogTags?: string[]
-} = { onlyIncludeBlogTags: undefined }) => {
-  const { data, error, loading } = useQuery(QUERY_BLOG_PAGES, {
-    variables: { onlyIncludeBlogTags }
-  });
+const useBlogList = () => {
+  const { data, error, loading } = useQuery(QUERY_BLOG_PAGES);
   if (!data) return
   return data.blogs
 }
@@ -542,11 +538,12 @@ const useBlogList = ({ onlyIncludeBlogTags }: {
 export const BlockBlogList: React.FC<{
   block: any
 }> = ({ block }) => {
-  const articles = useBlogList({ onlyIncludeBlogTags: block.onlyIncludeBlogTags.map(({ id }) => id) })
+  const articles = useBlogList()
   return (
     <Fragment>
       {articles
-        ?.sort((first, last) => new Date(last.created_at).getTime() - new Date(first.created_at).getTime())
+        ?.filter(b => block.onlyIncludeBlogTags?.length > 0 ? b.tags.some(tag => block.onlyIncludeBlogTags.some(checkTag => tag.id === checkTag.id)) : true)
+        .sort((first, last) => new Date(last.created_at).getTime() - new Date(first.created_at).getTime())
         .slice(0, block.maxNumberOfPosts || 20)
         .map((a) => (
           <BlogPreview key={a.id} article={a} />
