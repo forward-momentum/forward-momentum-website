@@ -494,7 +494,7 @@ export const BlockSignupStarter: React.FC<{
       </form>
       {!!registeredSupportersCount && (
         <Text sx={{ fontSize: [2, 3], pb: 2, textAlign: 'center' }}>
-          <u>{registeredSupportersCount}</u> / 2500 registered supporters goal
+          <u>{registeredSupportersCount}</u> / 5000 registered supporters goal
         </Text>
       )}
     </Box>
