@@ -11,8 +11,8 @@
   },
   "devDependencies": {},
   "dependencies": {
-    "knex": "<0.20.0",
-    "pg": "^8.0.0",
+    "knex": "<0.21.1",
+    "pg": "^8.0.3",
     "sqlite3": "latest",
     "strapi": "3.0.0-beta.19.5",
     "strapi-admin": "3.0.0-beta.19.5",
@@ -34,7 +34,7 @@
     "uuid": "a18e1848-8b9b-4838-84ce-55f2481a6ba2"
   },
   "engines": {
-    "node": ">=10.0.0",
+    "node": "12.16.x",
     "npm": ">=6.0.0",
     "yarn": "*"
   },
