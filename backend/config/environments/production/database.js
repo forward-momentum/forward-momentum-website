@@ -35,6 +35,6 @@ const dbConfig = {
   },
 }
 
-console.log("DB CONFIG", dbConfig)
+console.log("DB CONFIG", JSON.stringify(dbConfig))
 
 module.exports = dbConfig;
