@@ -22,6 +22,11 @@ export default async (req, res) => {
     res.end(JSON.stringify({ success, error: "Only accepts GET method" }))
   }
 
+  const errorTimeout = setTimeout(() => {
+    res.statusCode = 500
+    return res.end(JSON.stringify({ success, error: new Error("Request timed out.") }))
+  }, 5000)
+
   try {
     const count = await getRegisteredSupportersCount()
     success = true
@@ -31,5 +36,7 @@ export default async (req, res) => {
     console.error(error)
     res.statusCode = 500
     return res.end(JSON.stringify({ success, error }))
+  } finally {
+    clearTimeout(errorTimeout)
   }
 }
