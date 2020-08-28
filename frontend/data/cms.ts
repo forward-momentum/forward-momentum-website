@@ -39,9 +39,6 @@ export const PageFragment = graphql`
       ... on ComponentOrganismsSignUpForm {
         title
       }
-      ... on ComponentOrganismsBlogList {
-        ...BlogListFragment
-      }
       # And composed page content in section form
       ... on ComponentSpecialPageSectionPicker {
         section {
@@ -77,9 +74,6 @@ export const PageFragment = graphql`
             ... on ComponentOrganismsSignUpForm {
               title
             }
-            ... on ComponentOrganismsBlogList {
-              ...BlogListFragment
-            }
           }
         }
       }
@@ -94,10 +88,6 @@ export const PageFragment = graphql`
     }
     textColor
     backgroundColor
-  }
-
-  fragment BlogListFragment on ComponentOrganismsBlogList {
-    maxNumberOfPosts
   }
 
   fragment SignupStarter on ComponentOrganismsSignupStarter {
