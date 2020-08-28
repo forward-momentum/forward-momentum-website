@@ -24,7 +24,7 @@ if (process.env.DATABASE_URL) {
   settings.ssl = { rejectUnauthorized: false };
 }
 
-module.exports = {
+const dbConfig = {
   defaultConnection: "default",
   connections: {
     default: {
@@ -33,4 +33,8 @@ module.exports = {
       options: {},
     },
   },
-};
+}
+
+console.log("DB CONFIG", dbConfig)
+
+module.exports = dbConfig;
