@@ -431,7 +431,7 @@ const useRegisteredSupportersCount = (): (undefined | number) => {
 export const BlockSignupStarter: React.FC<{
   block: any
 }> = ({ block: { bg, textcolor, description } }) => {
-  const registeredSupportersCount = useRegisteredSupportersCount()
+  // const registeredSupportersCount = useRegisteredSupportersCount()
   return (
     <Box sx={{
       textAlign: 'center',
@@ -492,11 +492,11 @@ export const BlockSignupStarter: React.FC<{
           </Button>
         </Flex>
       </form>
-      {!!registeredSupportersCount && (
+      {/* {!!registeredSupportersCount && (
         <Text sx={{ fontSize: [2, 3], pb: 2, textAlign: 'center' }}>
           <u>{registeredSupportersCount}</u> / 5000 registered supporters goal
         </Text>
-      )}
+      )} */}
     </Box>
   )
 }
