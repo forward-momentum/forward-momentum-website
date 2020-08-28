@@ -98,9 +98,6 @@ export const PageFragment = graphql`
 
   fragment BlogListFragment on ComponentOrganismsBlogList {
     maxNumberOfPosts
-    onlyIncludeBlogTags {
-      id
-    }
   }
 
   fragment SignupStarter on ComponentOrganismsSignupStarter {

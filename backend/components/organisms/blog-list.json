@@ -12,9 +12,6 @@
       "default": 3,
       "required": false,
       "min": 1
-    },
-    "onlyIncludeBlogTags": {
-      "collection": "tags"
     }
   }
 }

@@ -41,11 +41,6 @@
     "sections": {
       "collection": "page-section",
       "via": "pages"
-    },
-    "tags": {
-      "via": "pages",
-      "collection": "tags",
-      "dominant": true
     }
   }
 }
