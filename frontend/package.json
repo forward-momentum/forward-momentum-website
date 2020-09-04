@@ -23,7 +23,7 @@
     "graphql-tag": "2.10.3",
     "heroku-ssl-redirect": "^0.0.4",
     "isomorphic-unfetch": "^3.0.0",
-    "markdown-to-jsx": "^6.11.0",
+    "markdown-to-jsx": "^6.11.4",
     "next": "^9.3.4",
     "posthog-js": "^1.0.4",
     "posthog-node": "^1.0.1",
